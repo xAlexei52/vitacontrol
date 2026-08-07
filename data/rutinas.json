@@ -1,0 +1,74 @@
+{
+  "notas": [
+    "Calienta 5–10 minutos antes de empezar (caminadora suave o bici)",
+    "Sesión objetivo: 45–60 minutos, según tu hoja de recomendaciones",
+    "Toma agua durante toda la sesión",
+    "Recuerda: 2 frutas después de pesas (indicación de tu nutriólogo)"
+  ],
+  "dias": [
+    {
+      "dia": 1,
+      "nombre": "Pecho y tríceps",
+      "icono": "🏋️",
+      "ejercicios": [
+        { "nombre": "Press de banca con mancuernas", "series": 4, "reps": "10", "descanso": "90 s", "videoId": "jrDDz7x1Dpo", "videoQuery": "press de banca con mancuernas técnica" },
+        { "nombre": "Press inclinado con mancuernas", "series": 3, "reps": "12", "descanso": "90 s", "videoId": "a64mtMHyPfY", "videoQuery": "press inclinado con mancuernas técnica" },
+        { "nombre": "Aperturas en máquina (pec deck)", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "WKfTStqIXrw", "videoQuery": "aperturas pec deck técnica" },
+        { "nombre": "Fondos en banco", "series": 3, "reps": "10", "descanso": "60 s", "videoId": "V1K9BFx9OeM", "videoQuery": "fondos de triceps en banco técnica" },
+        { "nombre": "Extensión de tríceps en polea", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "dRkTreltpnc", "videoQuery": "extension de triceps en polea técnica" },
+        { "nombre": "Caminadora (enfriamiento)", "series": 1, "reps": "10 min", "descanso": "-", "videoId": "", "videoQuery": "" }
+      ]
+    },
+    {
+      "dia": 2,
+      "nombre": "Espalda y bíceps",
+      "icono": "🚣",
+      "ejercicios": [
+        { "nombre": "Jalón al pecho en polea", "series": 4, "reps": "10", "descanso": "90 s", "videoId": "eSlKErmf5WU", "videoQuery": "jalon al pecho polea técnica" },
+        { "nombre": "Remo en polea baja", "series": 3, "reps": "12", "descanso": "90 s", "videoId": "rV2EKsX4P-A", "videoQuery": "remo en polea baja técnica" },
+        { "nombre": "Remo con mancuerna a una mano", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "ryhxLQUn-cQ", "videoQuery": "remo con mancuerna a una mano técnica" },
+        { "nombre": "Curl de bíceps con mancuernas", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "rqy0oxx__sU", "videoQuery": "curl de biceps con mancuernas técnica" },
+        { "nombre": "Curl martillo", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "WOxdd51XqVU", "videoQuery": "curl martillo técnica" },
+        { "nombre": "Bici o caminadora (enfriamiento)", "series": 1, "reps": "10 min", "descanso": "-", "videoId": "", "videoQuery": "" }
+      ]
+    },
+    {
+      "dia": 3,
+      "nombre": "Pierna",
+      "icono": "🦵",
+      "ejercicios": [
+        { "nombre": "Sentadilla goblet con mancuerna", "series": 4, "reps": "10", "descanso": "90 s", "videoId": "SpMrPG3RiCQ", "videoQuery": "sentadilla goblet técnica" },
+        { "nombre": "Prensa de pierna", "series": 3, "reps": "12", "descanso": "90 s", "videoId": "hl-EJUQ2yuc", "videoQuery": "prensa de pierna técnica" },
+        { "nombre": "Extensión de pierna", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "MyeQ1zCcfas", "videoQuery": "extension de pierna maquina técnica" },
+        { "nombre": "Curl femoral", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "POgzKaM92X4", "videoQuery": "curl femoral maquina técnica" },
+        { "nombre": "Elevación de talones (pantorrilla)", "series": 4, "reps": "15", "descanso": "45 s", "videoId": "kT-daLh6V2k", "videoQuery": "elevacion de talones pantorrilla técnica" },
+        { "nombre": "Caminadora inclinada (enfriamiento)", "series": 1, "reps": "10 min", "descanso": "-", "videoId": "", "videoQuery": "" }
+      ]
+    },
+    {
+      "dia": 4,
+      "nombre": "Hombro y abdomen",
+      "icono": "🤸",
+      "ejercicios": [
+        { "nombre": "Press de hombro con mancuernas", "series": 4, "reps": "10", "descanso": "90 s", "videoId": "eHY09oHxzQg", "videoQuery": "press de hombro con mancuernas técnica" },
+        { "nombre": "Elevaciones laterales", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "TKd7XMzvaQ4", "videoQuery": "elevaciones laterales técnica" },
+        { "nombre": "Elevaciones frontales", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "kLbvYQ-l4BA", "videoQuery": "elevaciones frontales técnica" },
+        { "nombre": "Face pull en polea", "series": 3, "reps": "15", "descanso": "60 s", "videoId": "tIuXc_X8T4I", "videoQuery": "face pull polea técnica" },
+        { "nombre": "Plancha", "series": 3, "reps": "30-45 s", "descanso": "45 s", "videoId": "ysX1CpHKGCo", "videoQuery": "plancha abdominal técnica" },
+        { "nombre": "Crunch abdominal", "series": 3, "reps": "15", "descanso": "45 s", "videoId": "HLAPlJhxqEE", "videoQuery": "crunch abdominal técnica" }
+      ]
+    },
+    {
+      "dia": 5,
+      "nombre": "Full body ligero + cardio",
+      "icono": "🔥",
+      "ejercicios": [
+        { "nombre": "Sentadilla goblet con mancuerna", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "SpMrPG3RiCQ", "videoQuery": "sentadilla goblet técnica" },
+        { "nombre": "Press de banca con mancuernas", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "jrDDz7x1Dpo", "videoQuery": "press de banca con mancuernas técnica" },
+        { "nombre": "Jalón al pecho en polea", "series": 3, "reps": "12", "descanso": "60 s", "videoId": "eSlKErmf5WU", "videoQuery": "jalon al pecho polea técnica" },
+        { "nombre": "Peso muerto rumano con mancuernas", "series": 3, "reps": "12", "descanso": "90 s", "videoId": "9j_L1KgpK8Y", "videoQuery": "peso muerto rumano con mancuernas técnica" },
+        { "nombre": "Cardio a elegir (caminadora, bici o elíptica)", "series": 1, "reps": "20 min", "descanso": "-", "videoId": "", "videoQuery": "" }
+      ]
+    }
+  ]
+}
