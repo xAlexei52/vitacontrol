@@ -88,32 +88,65 @@
     $('#view-login').classList.remove('hidden');
   }
 
-  async function initLogin() {
-    $('#login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = $('#login-btn');
-      const errEl = $('#login-error');
-      btn.disabled = true;
-      btn.textContent = 'Entrando…';
+  function initLogin() {
+    const MAX_PIN = 8;
+    let pin = '';
+    const dotsEl = $('#pin-dots');
+    const errEl = $('#login-error');
+
+    function drawDots() {
+      const n = Math.max(pin.length, 4);
+      dotsEl.innerHTML = Array.from({ length: n }, (_, i) =>
+        `<span class="pin-dot ${i < pin.length ? 'on' : ''}"></span>`).join('');
+    }
+    drawDots();
+
+    async function submit() {
+      if (pin.length < 4) return;
       errEl.classList.add('hidden');
       try {
         const res = await fetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: $('#login-email').value, password: $('#login-password').value }),
+          body: JSON.stringify({ pin }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'No se pudo entrar');
         API.token = data.token;
         localStorage.setItem('vc_token', data.token);
+        pin = '';
+        drawDots();
         await enterApp();
       } catch (err) {
         errEl.textContent = err.message;
         errEl.classList.remove('hidden');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Entrar';
+        pin = '';
+        drawDots();
+        const card = $('.login-card');
+        card.classList.remove('shake');
+        void card.offsetWidth;
+        card.classList.add('shake');
       }
+    }
+
+    function press(key) {
+      if (key === 'del') pin = pin.slice(0, -1);
+      else if (key === 'ok') return submit();
+      else if (pin.length < MAX_PIN) pin += key;
+      drawDots();
+    }
+
+    $('#pin-pad').addEventListener('click', (e) => {
+      const btn = e.target.closest('.pin-key');
+      if (btn) press(btn.dataset.key);
+    });
+
+    // Teclado físico (en PC)
+    document.addEventListener('keydown', (e) => {
+      if ($('#view-login').classList.contains('hidden')) return;
+      if (/^\d$/.test(e.key)) press(e.key);
+      else if (e.key === 'Backspace') press('del');
+      else if (e.key === 'Enter') press('ok');
     });
   }
 

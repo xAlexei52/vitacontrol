@@ -71,6 +71,64 @@ input:focus-visible, button:focus-visible, a:focus-visible, textarea:focus-visib
 
 .error { color: var(--danger); font-weight: 600; }
 
+/* ---------- PIN pad ---------- */
+.pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  min-height: 18px;
+  margin: 10px 0 18px;
+}
+
+.pin-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--muted);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.pin-dot.on { background: var(--primary); border-color: var(--primary); }
+
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.pin-key {
+  min-height: 76px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Barlow Condensed', 'Barlow', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pin-key:hover { background: var(--surface-2); }
+.pin-key:active { background: #24334f; }
+.pin-key svg { width: 30px; height: 30px; }
+.pin-del { color: var(--muted); }
+.pin-ok { background: var(--success); border-color: var(--success); color: #04150A; }
+.pin-ok:hover { background: #34D66C; }
+.pin-ok[disabled] { opacity: 0.5; cursor: default; }
+
+.login-card.shake { animation: shake 350ms ease; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-5px); }
+}
+
 /* ---------- Botones ---------- */
 .btn {
   display: inline-flex;

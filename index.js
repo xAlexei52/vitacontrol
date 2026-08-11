@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const { ensureAdminUser } = require('./db');
+const db = require('./db');
 const { router: authRouter, requireAuth } = require('./routes/auth');
 const apiRouter = require('./routes/api');
 
@@ -9,10 +9,13 @@ if (!process.env.JWT_SECRET) {
   console.error('Falta JWT_SECRET en .env (copia .env.example a .env)');
   process.exit(1);
 }
-
-ensureAdminUser();
+if (!process.env.PIN || !/^\d{4,8}$/.test(process.env.PIN)) {
+  console.error('Falta PIN en .env (4 a 8 dígitos, ej. PIN=2468)');
+  process.exit(1);
+}
 
 const app = express();
+app.set('trust proxy', 1); // detrás del proxy de Hostinger, req.ip usa X-Forwarded-For
 app.use(express.json());
 
 app.use('/api/auth', authRouter);
@@ -20,7 +23,17 @@ app.use('/api', requireAuth, apiRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`VitaControl corriendo en http://localhost:${PORT}`);
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Error del servidor' });
 });
+
+const PORT = process.env.PORT || 3000;
+db.init()
+  .then(() => {
+    app.listen(PORT, () => console.log(`VitaControl corriendo en http://localhost:${PORT}`));
+  })
+  .catch((err) => {
+    console.error('No se pudo conectar a la base de datos:', err.message);
+    process.exit(1);
+  });

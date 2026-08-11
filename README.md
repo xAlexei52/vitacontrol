@@ -5,22 +5,23 @@ Basada en el plan de alimentación por equivalentes del Instituto Jalisciense de
 
 ## Qué hace
 
+- **Entrada con PIN**: pad numérico grande (pensado para pantalla táctil / refrigerador). La sesión dura 1 año, así que en la práctica solo lo tecleas una vez por dispositivo.
 - **Hoy**: palomea tus 5 comidas del día, tus 2 tomas de Omega 3, registra tu peso y marca tu sesión de gym. Puedes navegar a días anteriores si se te olvidó registrar algo.
 - **Dieta**: tu menú completo con alternativas equivalentes por comida, tu suplemento y las recomendaciones de tu instituto.
 - **Gym**: rutina de 5 días (pecho/tríceps, espalda/bíceps, pierna, hombro/abs, full body + cardio) con video de técnica por ejercicio.
 - **Progreso**: gráfica de peso, calendario del mes con tus días de gym y dieta, adherencia semanal y recordatorio de laboratorios semestrales.
 
-Es una PWA: desde el navegador del celular usa "Agregar a pantalla de inicio" y queda como app.
+Es una PWA: desde el navegador del celular (o del refri) usa "Agregar a pantalla de inicio" y queda como app.
 
 ## Correr en local
 
 ```bash
-cp .env.example .env   # edita JWT_SECRET, ADMIN_EMAIL y ADMIN_PASSWORD
+cp .env.example .env   # pon tu PIN y un JWT_SECRET aleatorio
 npm install
 npm start              # abre http://localhost:3000
 ```
 
-El usuario se crea automáticamente la primera vez que arranca el servidor (con los datos del `.env`).
+En local no necesitas base de datos: usa SQLite (archivo `vitacontrol.db` que se crea solo).
 
 ## Editar la dieta o las rutinas
 
@@ -29,55 +30,56 @@ Todo el contenido vive en `data/`:
 - `data/dieta.json` — menú, alternativas, raciones y recomendaciones. Si tu nutriólogo cambia algo, edita aquí.
 - `data/rutinas.json` — los 5 días de rutina. Cada ejercicio tiene `videoId` (video de YouTube) y `videoQuery` (búsqueda de respaldo si el video deja de existir).
 
-No hace falta tocar código ni reiniciar con cuidado: los JSON se leen en cada petición.
+Los JSON se leen en cada petición: guardas el archivo y ya.
 
-## Desplegar en tu VPS
+## Desplegar en Hostinger
 
-```bash
-# En el VPS (con Node 18+ instalado)
-git clone <tu-repo> vitacontrol
-cd vitacontrol
-npm install --production
-cp .env.example .env
-nano .env              # pon un JWT_SECRET largo y aleatorio y TU contraseña real
+### 1. Crea la base de datos MySQL (en hPanel)
 
-# Correrlo con pm2 para que sobreviva reinicios
-npm install -g pm2
-pm2 start index.js --name vitacontrol
-pm2 save
-pm2 startup            # sigue la instrucción que imprime
+En **hPanel → Bases de datos → MySQL**:
+
+- Nombre de la base de datos: `vitacontrol` (Hostinger le pone tu prefijo, queda algo como `u123456789_vitacontrol`)
+- Crea también un usuario (ej. `vitacontrol`) con su contraseña y asígnalo a la BD con todos los permisos.
+
+No hay que correr ningún script SQL: la app crea sus tablas sola la primera vez que arranca.
+(Si algún día quieres crearlas a mano, el esquema está en `db.js`.)
+
+### 2. Sube la app Node.js
+
+En **hPanel → Sitios web → Node.js** (o vía Git):
+
+- Sube el proyecto (sin `node_modules` ni `.env` ni `vitacontrol.db`).
+- Archivo de arranque: `index.js`. Comando: `npm start`.
+- Corre `npm install` desde el panel o SSH.
+
+### 3. Variables de entorno
+
+En el panel de Node.js de Hostinger agrega (o crea un `.env` por SSH):
+
+```
+JWT_SECRET=una-cadena-larga-y-aleatoria-distinta-a-la-local
+PIN=tu-pin-de-4-a-8-digitos
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=u123456789_vitacontrol
+DB_USER=u123456789_vitacontrol
+DB_PASSWORD=la-contrasena-que-pusiste-en-hpanel
 ```
 
-### Nginx + HTTPS (recomendado)
+(`DB_HOST` en Hostinger normalmente es `localhost`; el nombre exacto de host, BD y usuario los ves en hPanel → MySQL.)
 
-La app va a tener datos de salud: ponla detrás de HTTPS.
+- Con `DB_HOST` definido, la app usa MySQL automáticamente.
+- No definas `PORT`: Hostinger lo inyecta solo.
 
-```nginx
-server {
-    server_name vitacontrol.tudominio.com;
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
-```
+### 4. Respaldo
 
-```bash
-sudo certbot --nginx -d vitacontrol.tudominio.com
-```
+Tus datos quedan en la BD MySQL; en hPanel → Bases de datos puedes descargar un respaldo cuando quieras (o programarlo). Ligero: son puros registros de texto.
 
-### Respaldo de la base de datos
+## Seguridad
 
-Toda tu información está en un solo archivo: `vitacontrol.db`. Respáldalo con cron:
-
-```bash
-crontab -e
-# Respaldo diario a las 3 am (conserva 30 días)
-0 3 * * * mkdir -p ~/vitacontrol/backups && sqlite3 ~/vitacontrol/vitacontrol.db ".backup '~/vitacontrol/backups/vitacontrol-$(date +\%F).db'" && find ~/vitacontrol/backups -name '*.db' -mtime +30 -delete
-```
-
-(Si no tienes `sqlite3` instalado: `sudo apt install sqlite3`, o simplemente copia el archivo con `cp` cuando la app no esté escribiendo.)
+- El PIN se limita a 5 intentos fallidos por IP cada 15 minutos.
+- Aún así, usa el dominio con HTTPS (en Hostinger es automático con su SSL gratis).
+- El PIN vive solo en el servidor (`.env`), nunca en el código ni en el navegador.
 
 ## Nota de salud
 

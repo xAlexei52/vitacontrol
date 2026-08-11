@@ -22,14 +22,26 @@
         <h1>VitaControl</h1>
         <p class="muted">Tu dieta, tu peso y tu gym en un solo lugar</p>
       </div>
-      <form id="login-form">
-        <label for="login-email">Correo</label>
-        <input type="email" id="login-email" autocomplete="username" required>
-        <label for="login-password">Contraseña</label>
-        <input type="password" id="login-password" autocomplete="current-password" required>
-        <p id="login-error" class="error hidden" role="alert"></p>
-        <button type="submit" class="btn btn-primary btn-block" id="login-btn">Entrar</button>
-      </form>
+      <div class="pin-dots" id="pin-dots" aria-label="PIN capturado"></div>
+      <p id="login-error" class="error hidden" role="alert"></p>
+      <div class="pin-pad" id="pin-pad" aria-label="Teclado numérico">
+        <button class="pin-key" data-key="1">1</button>
+        <button class="pin-key" data-key="2">2</button>
+        <button class="pin-key" data-key="3">3</button>
+        <button class="pin-key" data-key="4">4</button>
+        <button class="pin-key" data-key="5">5</button>
+        <button class="pin-key" data-key="6">6</button>
+        <button class="pin-key" data-key="7">7</button>
+        <button class="pin-key" data-key="8">8</button>
+        <button class="pin-key" data-key="9">9</button>
+        <button class="pin-key pin-del" data-key="del" aria-label="Borrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z"/><path d="m18 9-6 6M12 9l6 6"/></svg>
+        </button>
+        <button class="pin-key" data-key="0">0</button>
+        <button class="pin-key pin-ok" data-key="ok" aria-label="Entrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
