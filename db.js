@@ -52,7 +52,12 @@ async function init() {
     for (const sql of SCHEMA) await pool.query(sql);
     console.log(`Base de datos: MySQL (${process.env.DB_NAME} en ${process.env.DB_HOST})`);
   } else {
-    const Database = require('better-sqlite3');
+    let Database;
+    try {
+      Database = require('better-sqlite3');
+    } catch {
+      throw new Error('better-sqlite3 no está instalado (es opcional y se usa solo en local). Corre `npm install`, o define DB_HOST en .env para usar MySQL.');
+    }
     sqlite = new Database(path.join(__dirname, 'vitacontrol.db'));
     sqlite.pragma('journal_mode = WAL');
     for (const sql of SCHEMA) sqlite.exec(sql);
