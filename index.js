@@ -21,7 +21,12 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api', requireAuth, apiRouter);
 
-app.use(express.static(path.join(__dirname, 'public')));
+// no-cache = el navegador siempre revalida (304 si no cambió); evita
+// quedarse con CSS/JS viejos tras un deploy
+app.use(express.static(path.join(__dirname, 'public'), {
+  etag: true,
+  setHeaders: (res) => res.setHeader('Cache-Control', 'no-cache'),
+}));
 
 app.use((err, req, res, next) => {
   console.error(err);
