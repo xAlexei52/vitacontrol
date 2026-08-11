@@ -304,6 +304,13 @@ input:focus-visible, button:focus-visible, a:focus-visible, textarea:focus-visib
   font-size: 0.95rem;
 }
 .meal-detail .meal-list { margin-bottom: 8px; }
+.alt-title {
+  margin: 10px 0 6px;
+  font-weight: 700;
+  color: var(--primary);
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+}
 
 .timer {
   font-family: 'Barlow Condensed', sans-serif;

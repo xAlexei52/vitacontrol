@@ -293,12 +293,19 @@
       exp.setAttribute('aria-expanded', 'false');
       exp.innerHTML = ICONS.chevD;
 
+      // Alternativas = los siguientes menús completos de la semana (mismas raciones)
+      const sem = comida.semana || [];
+      const idx = sem.length ? weekIndex(date) % sem.length : 0;
+      const altMenus = sem.length > 2 ? [1, 2].map((k) => sem[(idx + k) % sem.length]) : [];
+
       const detail = document.createElement('div');
       detail.className = 'meal-detail hidden';
       detail.innerHTML = `
         <ul class="meal-list">${menuDelDia(comida, date).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-        ${(comida.alternativas || []).map((a) => `
-          <div class="alt-group"><b>${esc(a.titulo)}</b><span>${a.opciones.map(esc).join(' · ')}</span></div>`).join('')}`;
+        ${altMenus.length ? `
+          <p class="alt-title">¿No se te antoja? Cámbialo completo por:</p>
+          ${altMenus.map((items, k) => `
+            <div class="alt-group"><b>Alternativa ${k + 1}</b><span>${items.map(esc).join(' · ')}</span></div>`).join('')}` : ''}`;
 
       exp.addEventListener('click', () => {
         const open = detail.classList.toggle('hidden');
@@ -435,7 +442,7 @@
             </details>` : ''}
           ${c.alternativas && c.alternativas.length ? `
             <details class="alt">
-              <summary>Ver alternativas equivalentes</summary>
+              <summary>Equivalencias por ingrediente (cambios puntuales)</summary>
               ${c.alternativas.map((a) => `
                 <div class="alt-group"><b>${esc(a.titulo)}</b><span>${a.opciones.map(esc).join(' · ')}</span></div>`).join('')}
             </details>` : ''}
