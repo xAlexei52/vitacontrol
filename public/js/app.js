@@ -40,6 +40,8 @@
     play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
     chevL: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
     chevR: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
+    chevD: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+    timer: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>',
   };
 
   // ---------- Utilidades de fecha (siempre hora local) ----------
@@ -63,6 +65,15 @@
   function suggestedRoutineDay(s) {
     const dow = strToDate(s).getDay();
     return dow >= 1 && dow <= 5 ? dow : null;
+  }
+  const WEEK_NAMES = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  function weekIndex(s) { return (strToDate(s).getDay() + 6) % 7; } // 0 = lunes
+  // Menú que toca en esa fecha: rota entre las variantes de la semana
+  function menuDelDia(comida, s) {
+    if (comida.semana && comida.semana.length) {
+      return comida.semana[weekIndex(s) % comida.semana.length];
+    }
+    return comida.base || [];
   }
   function esc(t) {
     const div = document.createElement('div');
@@ -162,6 +173,7 @@
   window.addEventListener('hashchange', render);
 
   function render() {
+    clearInterval(state.gymTimer);
     const tab = (location.hash || '#hoy').slice(1);
     document.querySelectorAll('.tab').forEach((el) => {
       el.classList.toggle('active', el.dataset.tab === tab);
@@ -249,6 +261,9 @@
     const mealBox = $('#meal-checks');
     for (const comida of dieta.comidas) {
       const checked = day.meals[comida.id] && day.meals[comida.id].checked;
+      const row = document.createElement('div');
+      row.className = 'check-row';
+
       const btn = document.createElement('button');
       btn.className = 'check-item' + (checked ? ' checked' : '');
       btn.setAttribute('aria-pressed', checked ? 'true' : 'false');
@@ -256,7 +271,7 @@
         <span class="check-box">${ICONS.check}</span>
         <span class="check-body">
           <span class="check-title">${esc(comida.nombre)}</span>
-          <span class="check-sub">${esc(comida.base[0])}…</span>
+          <span class="check-sub">${esc(menuDelDia(comida, date)[0] || '')}…</span>
         </span>`;
       btn.addEventListener('click', async () => {
         const now = !btn.classList.contains('checked');
@@ -271,7 +286,28 @@
           toast(err.message);
         }
       });
-      mealBox.appendChild(btn);
+
+      const exp = document.createElement('button');
+      exp.className = 'expand-btn';
+      exp.setAttribute('aria-label', 'Ver menú de ' + comida.nombre);
+      exp.setAttribute('aria-expanded', 'false');
+      exp.innerHTML = ICONS.chevD;
+
+      const detail = document.createElement('div');
+      detail.className = 'meal-detail hidden';
+      detail.innerHTML = `
+        <ul class="meal-list">${menuDelDia(comida, date).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+        ${(comida.alternativas || []).map((a) => `
+          <div class="alt-group"><b>${esc(a.titulo)}</b><span>${a.opciones.map(esc).join(' · ')}</span></div>`).join('')}`;
+
+      exp.addEventListener('click', () => {
+        const open = detail.classList.toggle('hidden');
+        exp.classList.toggle('open', !open);
+        exp.setAttribute('aria-expanded', String(!open));
+      });
+
+      row.append(btn, exp);
+      mealBox.append(row, detail);
     }
 
     // Suplemento
@@ -361,6 +397,7 @@
   function renderDieta(main) {
     const dieta = state.content.dieta;
     const r = dieta.racionesDiarias;
+    const today = todayStr();
     main.innerHTML = `
       <h2 class="page-title">Tu dieta</h2>
       <p class="page-sub">Basada en tu plan de equivalentes</p>
@@ -385,7 +422,14 @@
       ${dieta.comidas.map((c) => `
         <div class="card">
           <h3>${esc(c.icono)} ${esc(c.nombre)}${c.omega3 ? ' <span class="progress-pill">+ Omega 3</span>' : ''}</h3>
-          <ul class="meal-list">${c.base.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+          <p class="muted" style="margin:0 0 6px">Hoy ${esc(WEEK_NAMES[weekIndex(today)].toLowerCase())}:</p>
+          <ul class="meal-list">${menuDelDia(c, today).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+          ${c.semana && c.semana.length > 1 ? `
+            <details class="alt">
+              <summary>Ver toda la semana</summary>
+              ${c.semana.map((items, i) => `
+                <div class="alt-group"><b>${esc(WEEK_NAMES[i] || 'Día ' + (i + 1))}</b><span>${items.map(esc).join(' · ')}</span></div>`).join('')}
+            </details>` : ''}
           ${c.alternativas && c.alternativas.length ? `
             <details class="alt">
               <summary>Ver alternativas equivalentes</summary>
@@ -410,14 +454,34 @@
   }
 
   // ---------- Vista: GYM ----------
-  function renderGym(main) {
+  // Entrenamiento en curso: se guarda en localStorage para sobrevivir recargas
+  function getWorkout() {
+    try {
+      const w = JSON.parse(localStorage.getItem('vc_workout'));
+      return w && w.date === todayStr() ? w : null;
+    } catch { return null; }
+  }
+
+  function fmtElapsed(ms) {
+    const total = Math.floor(ms / 1000);
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    const mm = String(m).padStart(2, '0');
+    const ss = String(s).padStart(2, '0');
+    return h > 0 ? `${h}:${mm}:${ss}` : `${mm}:${ss}`;
+  }
+
+  async function renderGym(main) {
     const rutinas = state.content.rutinas;
-    const suggested = suggestedRoutineDay(todayStr());
+    const today = todayStr();
+    const suggested = suggestedRoutineDay(today);
     const initial = suggested || 1;
 
     main.innerHTML = `
       <h2 class="page-title">Rutinas</h2>
       <p class="page-sub">5 días por semana · 45–60 min</p>
+      <div class="card" id="gym-today"><h3>${ICONS.timer} Entrenamiento de hoy</h3><p class="muted">Cargando…</p></div>
       <div class="day-pills" id="gym-tabs"></div>
       <div id="gym-day"></div>
       <div class="card">
@@ -438,6 +502,110 @@
       tabs.appendChild(b);
     });
     renderGymDay(rutinas.dias.find((d) => d.dia === initial));
+
+    let gym = null;
+    try {
+      const day = await API.call('/day/' + today);
+      gym = day.gym;
+    } catch { /* se muestra el selector de todos modos */ }
+    renderGymToday($('#gym-today'), gym, suggested);
+  }
+
+  function renderGymToday(box, gym, suggested) {
+    const rutinas = state.content.rutinas;
+    const today = todayStr();
+
+    // Ya completado hoy
+    if (gym && gym.completed) {
+      const d = rutinas.dias.find((x) => x.dia === gym.routineDay);
+      box.innerHTML = `
+        <h3>${ICONS.timer} Entrenamiento de hoy</h3>
+        <button class="check-item checked" aria-pressed="true">
+          <span class="check-box">${ICONS.check}</span>
+          <span class="check-body">
+            <span class="check-title">¡Completado!</span>
+            <span class="check-sub">Día ${gym.routineDay} — ${esc(d ? d.nombre : '')}${gym.notes ? ' · ' + esc(gym.notes) : ''}</span>
+          </span>
+        </button>
+        <p class="note-banner">Recuerda: 2 frutas después de pesas 🍎🍎</p>`;
+      box.querySelector('.check-item').addEventListener('click', async () => {
+        try {
+          await API.call(`/day/${today}/gym`, { method: 'PUT', body: { routineDay: gym.routineDay, completed: false } });
+          toast('Sesión desmarcada');
+          render();
+        } catch (err) { toast(err.message); }
+      });
+      return;
+    }
+
+    // Entrenamiento en curso → cronómetro
+    const workout = getWorkout();
+    if (workout) {
+      const d = rutinas.dias.find((x) => x.dia === workout.day);
+      box.innerHTML = `
+        <h3>${ICONS.timer} Entrenando: Día ${workout.day} — ${esc(d ? d.nombre : '')}</h3>
+        <div class="timer" id="gym-timer">00:00</div>
+        <button class="btn btn-success btn-block" id="gym-finish">Terminar y marcar completado</button>
+        <button class="btn btn-block" id="gym-cancel" style="margin-top:10px">Cancelar entrenamiento</button>`;
+      const timerEl = $('#gym-timer', box);
+      const tick = () => { timerEl.textContent = fmtElapsed(Date.now() - workout.start); };
+      tick();
+      state.gymTimer = setInterval(tick, 1000);
+
+      $('#gym-finish', box).addEventListener('click', async () => {
+        const min = Math.max(1, Math.round((Date.now() - workout.start) / 60000));
+        try {
+          await API.call(`/day/${today}/gym`, {
+            method: 'PUT',
+            body: { routineDay: workout.day, completed: true, notes: `Duración: ${min} min` },
+          });
+          localStorage.removeItem('vc_workout');
+          toast(`¡Buen trabajo! 💪 ${min} min`);
+          render();
+        } catch (err) { toast(err.message); }
+      });
+      $('#gym-cancel', box).addEventListener('click', () => {
+        localStorage.removeItem('vc_workout');
+        toast('Entrenamiento cancelado');
+        render();
+      });
+      return;
+    }
+
+    // Sin empezar → elegir qué trabajar hoy e iniciar
+    box.innerHTML = `
+      <h3>${ICONS.timer} Entrenamiento de hoy</h3>
+      <p class="muted" style="margin:0 0 8px">¿Qué toca trabajar hoy?</p>
+      <div class="day-pills" role="radiogroup" aria-label="Parte del cuerpo de hoy">
+        ${rutinas.dias.map((d) => `
+          <button class="day-pill ${suggested === d.dia ? 'active' : ''}" data-day="${d.dia}" role="radio"
+            aria-checked="${suggested === d.dia}">${d.dia} · ${esc(d.nombre)}</button>`).join('')}
+      </div>
+      <button class="btn btn-primary btn-block" id="gym-start">${ICONS.timer} Iniciar entrenamiento</button>
+      <button class="btn btn-block btn-sm" id="gym-quick" style="margin-top:10px">Marcar completado sin cronómetro</button>`;
+
+    let selected = suggested || 1;
+    box.querySelectorAll('.day-pill').forEach((p) => {
+      p.addEventListener('click', () => {
+        selected = Number(p.dataset.day);
+        box.querySelectorAll('.day-pill').forEach((x) => {
+          x.classList.toggle('active', x === p);
+          x.setAttribute('aria-checked', x === p ? 'true' : 'false');
+        });
+      });
+    });
+    $('#gym-start', box).addEventListener('click', () => {
+      localStorage.setItem('vc_workout', JSON.stringify({ date: today, day: selected, start: Date.now() }));
+      toast('¡A darle! 💪');
+      render();
+    });
+    $('#gym-quick', box).addEventListener('click', async () => {
+      try {
+        await API.call(`/day/${today}/gym`, { method: 'PUT', body: { routineDay: selected, completed: true } });
+        toast('¡Buen trabajo! 💪');
+        render();
+      } catch (err) { toast(err.message); }
+    });
   }
 
   function renderGymDay(dia) {
