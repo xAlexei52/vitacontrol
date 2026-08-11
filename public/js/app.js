@@ -261,11 +261,11 @@
     const mealBox = $('#meal-checks');
     for (const comida of dieta.comidas) {
       const checked = day.meals[comida.id] && day.meals[comida.id].checked;
-      const row = document.createElement('div');
-      row.className = 'check-row';
+      const card = document.createElement('div');
+      card.className = 'meal-card' + (checked ? ' checked' : '');
 
       const btn = document.createElement('button');
-      btn.className = 'check-item' + (checked ? ' checked' : '');
+      btn.className = 'check-item';
       btn.setAttribute('aria-pressed', checked ? 'true' : 'false');
       btn.innerHTML = `
         <span class="check-box">${ICONS.check}</span>
@@ -274,15 +274,15 @@
           <span class="check-sub">${esc(menuDelDia(comida, date)[0] || '')}…</span>
         </span>`;
       btn.addEventListener('click', async () => {
-        const now = !btn.classList.contains('checked');
-        btn.classList.toggle('checked', now);
+        const now = !card.classList.contains('checked');
+        card.classList.toggle('checked', now);
         btn.setAttribute('aria-pressed', now ? 'true' : 'false');
         try {
           await API.call(`/day/${date}/meal`, { method: 'PUT', body: { meal: comida.id, checked: now } });
-          const n = mealBox.querySelectorAll('.check-item.checked').length;
+          const n = mealBox.querySelectorAll('.meal-card.checked').length;
           $('#meals-pill').textContent = n + '/5';
         } catch (err) {
-          btn.classList.toggle('checked', !now);
+          card.classList.toggle('checked', !now);
           toast(err.message);
         }
       });
@@ -306,8 +306,11 @@
         exp.setAttribute('aria-expanded', String(!open));
       });
 
+      const row = document.createElement('div');
+      row.className = 'check-row';
       row.append(btn, exp);
-      mealBox.append(row, detail);
+      card.append(row, detail);
+      mealBox.appendChild(card);
     }
 
     // Suplemento
