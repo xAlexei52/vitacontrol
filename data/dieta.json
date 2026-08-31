@@ -1,456 +1,1284 @@
 {
-    "fuente":  "Plan de alimentación por equivalentes — Instituto Jalisciense de Cancerología (05/08/2026, MNC Francisco Javier Fragoso Torres)",
-    "racionesDiarias":  {
-                            "verduras":  5,
-                            "frutas":  4,
-                            "cereales":  5,
-                            "proteinaVegetal":  1,
-                            "proteinaAnimal":  7,
-                            "lacteos":  2,
-                            "grasas":  3,
-                            "oleaginosas":  1,
-                            "azucares":  0
-                        },
-    "notaFrutas":  "Indicación de tu nutriólogo: 2 frutas después de pesas",
-    "comidas":  [
-                    {
-                        "id":  "desayuno",
-                        "nombre":  "Desayuno",
-                        "icono":  "🍳",
-                        "raciones":  {
-                                         "verduras":  1,
-                                         "frutas":  1,
-                                         "cereales":  2,
-                                         "proteinaAnimal":  2,
-                                         "grasas":  1
-                                     },
-                        "semana":  [
-                                       [
-                                           "1 huevo entero + 2 claras revueltos con espinacas",
-                                           "2 tortillas de maíz",
-                                           "1 manzana picada",
-                                           "1 cdta de aceite",
-                                           "Café o té sin azúcar"
-                                       ],
-                                       [
-                                           "Atún en agua (60 g) a la mexicana con jitomate y cebolla",
-                                           "2 tostadas horneadas",
-                                           "1 taza de papaya",
-                                           "1 cdta de aceite de oliva",
-                                           "Café o té sin azúcar"
-                                       ],
-                                       [
-                                           "Omelette de 4 claras con champiñones y jitomate",
-                                           "1½ tazas de avena cocida con canela (sin azúcar)",
-                                           "12 fresas",
-                                           "1 cdta de aceite"
-                                       ],
-                                       [
-                                           "Queso panela asado (80 g) con nopales",
-                                           "2 tortillas de maíz",
-                                           "3 duraznos",
-                                           "1 cdta de aceite",
-                                           "Café o té sin azúcar"
-                                       ],
-                                       [
-                                           "1 huevo entero + 2 claras a la mexicana",
-                                           "2 rebanadas de pan de caja tostado",
-                                           "½ pera",
-                                           "1 cdta de aceite",
-                                           "Café o té sin azúcar"
-                                       ],
-                                       [
-                                           "Requesón (4 cdas) con jitomate sobre 2 tostadas horneadas",
-                                           "1 taza de melón picado",
-                                           "1 cdta de aceite de oliva",
-                                           "Café o té sin azúcar"
-                                       ],
-                                       [
-                                           "Chilaquiles ligeros: 2 tortillas horneadas en salsa verde con 1 huevo + 2 claras",
-                                           "Nopales o cebolla asada",
-                                           "2 mandarinas",
-                                           "1 cdta de aceite"
-                                       ]
-                                   ],
-                        "alternativas":  [
-                                             {
-                                                 "titulo":  "Proteína (2 raciones)",
-                                                 "opciones":  [
-                                                                  "Atún en agua 60 g",
-                                                                  "Queso panela light 80 g",
-                                                                  "Pechuga deshebrada 60 g",
-                                                                  "Queso cottage 6 cdas",
-                                                                  "Requesón 4 cdas"
-                                                              ]
-                                             },
-                                             {
-                                                 "titulo":  "Cereal (2 raciones)",
-                                                 "opciones":  [
-                                                                  "1½ tazas de avena cocida",
-                                                                  "2 rebanadas de pan de caja",
-                                                                  "⅔ taza de arroz cocido",
-                                                                  "2 tostadas horneadas"
-                                                              ]
-                                             },
-                                             {
-                                                 "titulo":  "Fruta (1 ración)",
-                                                 "opciones":  [
-                                                                  "1 manzana",
-                                                                  "1 taza de papaya",
-                                                                  "½ pera",
-                                                                  "3 duraznos",
-                                                                  "12 fresas",
-                                                                  "2 mandarinas"
-                                                              ]
-                                             }
-                                         ],
-                        "omega3":  true,
-                        "base":  [
-                                     "1 huevo entero + 2 claras revueltos con espinacas",
-                                     "2 tortillas de maíz",
-                                     "1 manzana picada",
-                                     "1 cdta de aceite",
-                                     "Café o té sin azúcar"
-                                 ]
-                    },
-                    {
-                        "id":  "colacion1",
-                        "nombre":  "Colación de media mañana",
-                        "icono":  "🥜",
-                        "raciones":  {
-                                         "verduras":  1,
-                                         "frutas":  1,
-                                         "lacteos":  1,
-                                         "oleaginosas":  0.5
-                                     },
-                        "semana":  [
-                                       [
-                                           "1 taza de yogurt natural sin azúcar",
-                                           "1 manzana",
-                                           "5 almendras",
-                                           "Pepino con limón al gusto"
-                                       ],
-                                       [
-                                           "1 taza de leche light",
-                                           "½ plátano tabasco",
-                                           "9 pistaches",
-                                           "Jícama con limón"
-                                       ],
-                                       [
-                                           "1 taza de yogurt griego sin azúcar",
-                                           "18 uvas",
-                                           "3 mitades de nuez",
-                                           "Zanahoria rallada"
-                                       ],
-                                       [
-                                           "1 taza de yogurt natural sin azúcar",
-                                           "1 taza de papaya",
-                                           "5 almendras",
-                                           "Pepino con limón"
-                                       ],
-                                       [
-                                           "1 taza de leche light",
-                                           "3 guayabas",
-                                           "9 pistaches",
-                                           "Jícama con limón"
-                                       ],
-                                       [
-                                           "1 taza de yogurt griego sin azúcar",
-                                           "12 fresas",
-                                           "3 mitades de nuez",
-                                           "Pepino"
-                                       ],
-                                       [
-                                           "1 taza de yogurt natural sin azúcar",
-                                           "2 mandarinas",
-                                           "5 almendras",
-                                           "Zanahoria"
-                                       ]
-                                   ],
-                        "alternativas":  [
-                                             {
-                                                 "titulo":  "Lácteo (1 ración)",
-                                                 "opciones":  [
-                                                                  "1 taza de leche light/descremada",
-                                                                  "1 taza de yogurt natural o griego sin azúcar"
-                                                              ]
-                                             },
-                                             {
-                                                 "titulo":  "Oleaginosas (½ ración)",
-                                                 "opciones":  [
-                                                                  "5 almendras",
-                                                                  "9 pistaches",
-                                                                  "3 mitades de nuez",
-                                                                  "6 cacahuates"
-                                                              ]
-                                             }
-                                         ],
-                        "omega3":  false,
-                        "base":  [
-                                     "1 taza de yogurt natural sin azúcar",
-                                     "1 manzana",
-                                     "5 almendras",
-                                     "Pepino con limón al gusto"
-                                 ]
-                    },
-                    {
-                        "id":  "comida",
-                        "nombre":  "Comida",
-                        "icono":  "🍗",
-                        "raciones":  {
-                                         "verduras":  1,
-                                         "cereales":  2,
-                                         "proteinaAnimal":  3,
-                                         "proteinaVegetal":  1,
-                                         "grasas":  1
-                                     },
-                        "semana":  [
-                                       [
-                                           "120 g de pechuga de pollo a la plancha",
-                                           "½ taza de frijoles",
-                                           "2 tortillas de maíz",
-                                           "Ensalada grande (libre)",
-                                           "1 cdta de aceite de oliva"
-                                       ],
-                                       [
-                                           "120 g de pescado blanco a la plancha u horno",
-                                           "½ taza de lentejas",
-                                           "⅔ taza de arroz cocido",
-                                           "Verduras al vapor",
-                                           "1 cdta de aceite de oliva"
-                                       ],
-                                       [
-                                           "120 g de pechuga deshebrada en salsa de jitomate",
-                                           "½ taza de frijoles",
-                                           "2 tortillas de maíz",
-                                           "Nopales asados",
-                                           "1 cdta de aceite"
-                                       ],
-                                       [
-                                           "90 g de atún en agua en ensalada (lechuga, jitomate, pepino)",
-                                           "½ taza de garbanzos",
-                                           "2 tostadas horneadas",
-                                           "1 cdta de mayonesa light"
-                                       ],
-                                       [
-                                           "120 g de pescado empapelado con verduras",
-                                           "½ taza de lentejas",
-                                           "1 taza de pasta de sopa cocida",
-                                           "1 cdta de aceite de oliva"
-                                       ],
-                                       [
-                                           "90 g de res sin grasa asada (máx. 1 vez por semana)",
-                                           "½ taza de frijoles",
-                                           "⅔ taza de arroz cocido",
-                                           "Ensalada grande",
-                                           "1 cdta de aceite"
-                                       ],
-                                       [
-                                           "120 g de pollo al horno sin piel",
-                                           "½ taza de habas",
-                                           "1 taza de papa cocida",
-                                           "Verduras al vapor",
-                                           "1 cdta de aceite de oliva"
-                                       ]
-                                   ],
-                        "alternativas":  [
-                                             {
-                                                 "titulo":  "Proteína (3 raciones)",
-                                                 "opciones":  [
-                                                                  "120 g de pollo",
-                                                                  "120 g de pescado blanco",
-                                                                  "90 g de atún en agua",
-                                                                  "120 g de queso panela light"
-                                                              ]
-                                             },
-                                             {
-                                                 "titulo":  "Leguminosa (1 ración)",
-                                                 "opciones":  [
-                                                                  "½ taza de frijoles, lentejas, habas o garbanzos cocidos",
-                                                                  "⅓ taza de frijoles molidos"
-                                                              ]
-                                             },
-                                             {
-                                                 "titulo":  "Cereal (2 raciones)",
-                                                 "opciones":  [
-                                                                  "2 tortillas de maíz",
-                                                                  "⅔ taza de arroz",
-                                                                  "1 taza de pasta de sopa",
-                                                                  "1 taza de papa cocida",
-                                                                  "2 tostadas horneadas"
-                                                              ]
-                                             }
-                                         ],
-                        "omega3":  false,
-                        "base":  [
-                                     "120 g de pechuga de pollo a la plancha",
-                                     "½ taza de frijoles",
-                                     "2 tortillas de maíz",
-                                     "Ensalada grande (libre)",
-                                     "1 cdta de aceite de oliva"
-                                 ]
-                    },
-                    {
-                        "id":  "colacion2",
-                        "nombre":  "Colación de la tarde (post-gym)",
-                        "icono":  "💪",
-                        "raciones":  {
-                                         "verduras":  1,
-                                         "frutas":  2,
-                                         "lacteos":  1,
-                                         "oleaginosas":  0.5
-                                     },
-                        "semana":  [
-                                       [
-                                           "1 manzana + 3 duraznos (2 frutas después de pesas)",
-                                           "1 taza de yogurt sin azúcar",
-                                           "5 almendras",
-                                           "Pepino al gusto"
-                                       ],
-                                       [
-                                           "1 taza de papaya + 12 fresas (2 frutas después de pesas)",
-                                           "1 taza de leche light",
-                                           "9 pistaches"
-                                       ],
-                                       [
-                                           "2 mandarinas + ½ pera (2 frutas después de pesas)",
-                                           "1 taza de yogurt griego sin azúcar",
-                                           "3 mitades de nuez"
-                                       ],
-                                       [
-                                           "1 taza de melón + 1 taza de sandía (2 frutas después de pesas)",
-                                           "1 taza de yogurt sin azúcar",
-                                           "5 almendras"
-                                       ],
-                                       [
-                                           "½ plátano tabasco + 1 manzana (2 frutas después de pesas)",
-                                           "1 taza de leche light",
-                                           "9 pistaches"
-                                       ],
-                                       [
-                                           "18 uvas + 3 guayabas (2 frutas después de pesas)",
-                                           "1 taza de yogurt sin azúcar",
-                                           "3 mitades de nuez"
-                                       ],
-                                       [
-                                           "12 fresas + 3 duraznos (2 frutas después de pesas)",
-                                           "1 taza de yogurt sin azúcar",
-                                           "5 almendras"
-                                       ]
-                                   ],
-                        "alternativas":  [
-                                             {
-                                                 "titulo":  "Frutas (2 raciones)",
-                                                 "opciones":  [
-                                                                  "Cualquier par de tu lista: manzana, pera ½, durazno x3, papaya 1 tza, fresas x12, mandarina x2, melón 1 tza, plátano ½, uvas x18, guayaba x3"
-                                                              ]
-                                             }
-                                         ],
-                        "omega3":  false,
-                        "base":  [
-                                     "1 manzana + 3 duraznos (2 frutas después de pesas)",
-                                     "1 taza de yogurt sin azúcar",
-                                     "5 almendras",
-                                     "Pepino al gusto"
-                                 ]
-                    },
-                    {
-                        "id":  "cena",
-                        "nombre":  "Cena",
-                        "icono":  "🌙",
-                        "raciones":  {
-                                         "verduras":  1,
-                                         "cereales":  1,
-                                         "proteinaAnimal":  2,
-                                         "grasas":  1
-                                     },
-                        "semana":  [
-                                       [
-                                           "60–90 g de pollo deshebrado",
-                                           "1 tortilla de maíz",
-                                           "Verduras al vapor",
-                                           "⅓ de aguacate"
-                                       ],
-                                       [
-                                           "Quesadilla: 1 tortilla con 80 g de queso panela",
-                                           "Nopales asados",
-                                           "⅓ de aguacate"
-                                       ],
-                                       [
-                                           "60 g de atún en agua sobre 1 tostada horneada",
-                                           "Ensalada de lechuga y jitomate",
-                                           "⅓ de aguacate"
-                                       ],
-                                       [
-                                           "1 huevo entero + 2 claras con verduras",
-                                           "1 tortilla de maíz",
-                                           "⅓ de aguacate"
-                                       ],
-                                       [
-                                           "80 g de queso panela a la plancha con jitomate",
-                                           "1 rebanada de pan tostado",
-                                           "Ensalada",
-                                           "⅓ de aguacate"
-                                       ],
-                                       [
-                                           "Tacos: 60–90 g de pollo deshebrado en 1 tortilla con lechuga y salsa",
-                                           "⅓ de aguacate"
-                                       ],
-                                       [
-                                           "1 sardina en tomate sobre 1 tostada horneada",
-                                           "Ensalada",
-                                           "⅓ de aguacate"
-                                       ]
-                                   ],
-                        "alternativas":  [
-                                             {
-                                                 "titulo":  "Proteína (2 raciones)",
-                                                 "opciones":  [
-                                                                  "Queso panela light 80 g",
-                                                                  "Atún en agua 60 g",
-                                                                  "1 huevo + 2 claras",
-                                                                  "Sardina en tomate 1 pieza",
-                                                                  "Pollo 60 g"
-                                                              ]
-                                             },
-                                             {
-                                                 "titulo":  "Cereal (1 ración)",
-                                                 "opciones":  [
-                                                                  "1 tortilla de maíz",
-                                                                  "1 tostada horneada",
-                                                                  "1 rebanada de pan de caja",
-                                                                  "¾ taza de avena cocida"
-                                                              ]
-                                             }
-                                         ],
-                        "omega3":  true,
-                        "base":  [
-                                     "60–90 g de pollo deshebrado",
-                                     "1 tortilla de maíz",
-                                     "Verduras al vapor",
-                                     "⅓ de aguacate"
-                                 ]
-                    }
-                ],
-    "suplemento":  {
-                       "nombre":  "Lysi Omega 3",
-                       "indicacion":  "1 cucharada cada 12 horas (desayuno y cena), hasta nuevo aviso",
-                       "alternativas":  [
-                                            "Lysi Omega 3 Forte: 2 cápsulas al día, 1 cada 12 horas",
-                                            "Si no es posible: 1 cucharada de aceite de oliva extra virgen en las verduras, cada 12 horas"
-                                        ]
-                   },
-    "recomendaciones":  [
-                            "Nada de azúcar: evita panes, galletas, pasteles, mermeladas, refrescos y jugos (ni naturales) — come la fruta entera",
-                            "Prefiere avena, arroz integral, pasta integral y tortilla de maíz",
-                            "Proteínas magras: pollo, pescado, claras de huevo",
-                            "Pescado rico en omega 3 (salmón, sardina, atún, trucha) al menos 2 veces por semana",
-                            "Carnes rojas máximo 2 veces por semana",
-                            "Lácteos siempre descremados (leche, queso, yogurt)",
-                            "Horarios fijos de comida, no te malpases: come de 3 a 5 veces al día",
-                            "Ejercicio físico 3 a 5 días por semana, 45–60 minutos",
-                            "Evita fumar y beber alcohol",
-                            "Revisa colesterol y triglicéridos cada 6 meses"
-                        ],
-    "notaMedica":  "Plan basado en las indicaciones del Instituto Jalisciense de Cancerología. Consulta a tu nutriólogo antes de cambiarlo."
+  "fuente": "Plan de alimentación por equivalentes — Instituto Jalisciense de Cancerología (05/08/2026, MNC Francisco Javier Fragoso Torres)",
+  "racionesDiarias": {
+    "verduras": 5,
+    "frutas": 4,
+    "cereales": 5,
+    "proteinaVegetal": 1,
+    "proteinaAnimal": 7,
+    "lacteos": 2,
+    "grasas": 3,
+    "oleaginosas": 1,
+    "azucares": 0
+  },
+  "notaFrutas": "Indicación de tu nutriólogo: 2 frutas después de pesas",
+  "comidas": [
+    {
+      "id": "desayuno",
+      "nombre": "Desayuno",
+      "icono": "🍳",
+      "raciones": {
+        "verduras": 1,
+        "frutas": 1,
+        "cereales": 2,
+        "proteinaAnimal": 2,
+        "grasas": 1
+      },
+      "semana": [
+        [
+          "1 huevo entero + 2 claras revueltos con espinacas",
+          "2 tortillas de maíz",
+          "1 manzana picada",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Atún en agua (60 g) a la mexicana con jitomate y cebolla",
+          "2 tostadas horneadas",
+          "1 taza de papaya",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Omelette de 4 claras con champiñones y jitomate",
+          "1½ tazas de avena cocida con canela (sin azúcar)",
+          "12 fresas",
+          "1 cdta de aceite"
+        ],
+        [
+          "Queso panela asado (80 g) con nopales",
+          "2 tortillas de maíz",
+          "3 duraznos",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "1 huevo entero + 2 claras a la mexicana",
+          "2 rebanadas de pan de caja tostado",
+          "½ pera",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Requesón (4 cdas) con jitomate sobre 2 tostadas horneadas",
+          "1 taza de melón picado",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Chilaquiles ligeros: 2 tortillas horneadas en salsa verde con 1 huevo + 2 claras",
+          "Nopales o cebolla asada",
+          "2 mandarinas",
+          "1 cdta de aceite"
+        ],
+        [
+          "1 huevo entero + 2 claras revueltos con calabacita",
+          "2 tortillas de maíz",
+          "1 taza de sandía",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Queso cottage (6 cdas) con pepino y jitomate",
+          "2 rebanadas de pan de caja tostado",
+          "18 uvas",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Pechuga deshebrada (60 g) con rajas de chile poblano",
+          "2 tortillas de maíz",
+          "1 naranja",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Omelette de 4 claras con acelgas y cebolla",
+          "1½ tazas de avena cocida con canela (sin azúcar)",
+          "1 taza de melón picado",
+          "1 cdta de aceite"
+        ],
+        [
+          "Atún en agua (60 g) con pepino, apio y limón",
+          "2 tostadas horneadas",
+          "1 manzana",
+          "1 cdta de mayonesa light",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Queso panela asado (80 g) con jitomate y albahaca",
+          "2 rebanadas de pan de caja tostado",
+          "3 guayabas",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "1 huevo entero + 2 claras con nopales y cebolla",
+          "2 tostadas horneadas",
+          "2 ciruelas",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Requesón (4 cdas) con espinaca cruda y jitomate",
+          "1½ tazas de avena cocida (sin azúcar)",
+          "1 taza de piña picada",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Omelette de 4 claras con flor de calabaza",
+          "2 tortillas de maíz",
+          "½ plátano tabasco",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Pechuga deshebrada (60 g) en salsa verde con nopales",
+          "2 tortillas de maíz",
+          "1 taza de papaya",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Queso cottage (6 cdas) con zanahoria rallada",
+          "2 tostadas horneadas",
+          "3 duraznos",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "1 huevo entero + 2 claras con ejotes y jitomate",
+          "⅔ taza de arroz cocido",
+          "12 fresas",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Atún en agua (60 g) con lechuga y jitomate",
+          "2 rebanadas de pan de caja tostado",
+          "1 taza de melón",
+          "⅓ de aguacate",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Queso panela (80 g) a la plancha con espárragos",
+          "2 tortillas de maíz",
+          "18 uvas",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Omelette de 4 claras con brócoli y cebolla morada",
+          "2 tostadas horneadas",
+          "1 taza de sandía",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Requesón (4 cdas) con jitomate y orégano",
+          "2 tortillas de maíz doradas al comal",
+          "1 manzana",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "1 huevo entero + 2 claras con champiñones y espinacas",
+          "1½ tazas de avena cocida (sin azúcar)",
+          "2 mandarinas",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Pechuga deshebrada (60 g) con col morada y zanahoria",
+          "2 tostadas horneadas",
+          "½ pera",
+          "1 cdta de mayonesa light",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Queso cottage (6 cdas) con chayote al vapor",
+          "2 rebanadas de pan de caja tostado",
+          "1 taza de piña picada",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Atún en agua (60 g) a la mexicana con nopales",
+          "2 tortillas de maíz",
+          "3 guayabas",
+          "1 cdta de aceite",
+          "Café o té sin azúcar"
+        ],
+        [
+          "Omelette de 4 claras con jitomate y pimiento",
+          "1 taza de papa cocida en cubos al comal",
+          "1 naranja",
+          "1 cdta de aceite de oliva",
+          "Café o té sin azúcar"
+        ]
+      ],
+      "alternativas": [
+        {
+          "titulo": "Proteína (2 raciones)",
+          "opciones": [
+            "1 huevo entero + 2 claras",
+            "4 claras (omelette)",
+            "Atún en agua 60 g",
+            "Queso panela light 80 g",
+            "Pechuga deshebrada 60 g",
+            "Queso cottage 6 cdas",
+            "Requesón 4 cdas",
+            "Sardina en tomate 1 pieza"
+          ]
+        },
+        {
+          "titulo": "Cereal (2 raciones)",
+          "opciones": [
+            "2 tortillas de maíz",
+            "2 tostadas horneadas",
+            "2 rebanadas de pan de caja",
+            "1½ tazas de avena cocida",
+            "⅔ taza de arroz cocido",
+            "1 taza de papa cocida",
+            "1 bolillo sin migajón",
+            "1 taza de camote cocido"
+          ]
+        },
+        {
+          "titulo": "Fruta (1 ración)",
+          "opciones": [
+            "1 manzana",
+            "½ pera",
+            "3 duraznos",
+            "1 taza de papaya",
+            "12 fresas",
+            "2 mandarinas",
+            "1 taza de melón",
+            "1 taza de sandía",
+            "½ plátano tabasco",
+            "18 uvas",
+            "3 guayabas",
+            "1 taza de piña picada",
+            "1 naranja",
+            "2 ciruelas"
+          ]
+        },
+        {
+          "titulo": "Grasa (1 ración)",
+          "opciones": [
+            "1 cdta de aceite",
+            "1 cdta de aceite de oliva",
+            "⅓ de aguacate",
+            "1 cdta de mayonesa light",
+            "6 aceitunas"
+          ]
+        },
+        {
+          "titulo": "Verdura (libre)",
+          "opciones": [
+            "Espinacas",
+            "Nopales",
+            "Jitomate y cebolla",
+            "Champiñones",
+            "Calabacita",
+            "Rajas de chile poblano",
+            "Pimiento",
+            "Acelgas",
+            "Ejotes",
+            "Brócoli",
+            "Col",
+            "Espárragos",
+            "Flor de calabaza",
+            "Chayote"
+          ]
+        }
+      ],
+      "omega3": true,
+      "base": [
+        "1 huevo entero + 2 claras revueltos con espinacas",
+        "2 tortillas de maíz",
+        "1 manzana picada",
+        "1 cdta de aceite",
+        "Café o té sin azúcar"
+      ]
+    },
+    {
+      "id": "colacion1",
+      "nombre": "Colación de media mañana",
+      "icono": "🥜",
+      "raciones": {
+        "verduras": 1,
+        "frutas": 1,
+        "lacteos": 1,
+        "oleaginosas": 0.5
+      },
+      "semana": [
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "1 manzana",
+          "5 almendras",
+          "Pepino con limón al gusto"
+        ],
+        [
+          "1 taza de leche light",
+          "½ plátano tabasco",
+          "9 pistaches",
+          "Jícama con limón"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "18 uvas",
+          "3 mitades de nuez",
+          "Zanahoria rallada"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "1 taza de papaya",
+          "5 almendras",
+          "Pepino con limón"
+        ],
+        [
+          "1 taza de leche light",
+          "3 guayabas",
+          "9 pistaches",
+          "Jícama con limón"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "12 fresas",
+          "3 mitades de nuez",
+          "Pepino"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "2 mandarinas",
+          "5 almendras",
+          "Zanahoria"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "1 taza de sandía",
+          "6 cacahuates",
+          "Apio con limón"
+        ],
+        [
+          "1 taza de leche light",
+          "1 naranja",
+          "4 mitades de nuez de la India",
+          "Pepino con chile en polvo sin azúcar"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "1 taza de piña picada",
+          "5 almendras",
+          "Jitomate cherry"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "2 ciruelas",
+          "9 pistaches",
+          "Zanahoria en bastones"
+        ],
+        [
+          "1 taza de leche light",
+          "1 taza de melón",
+          "3 mitades de nuez",
+          "Pimiento en tiras"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "1 manzana",
+          "6 cacahuates",
+          "Jícama con limón"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "½ pera",
+          "2 cdtas de ajonjolí tostado",
+          "Pepino"
+        ],
+        [
+          "1 taza de leche light",
+          "18 uvas",
+          "5 almendras",
+          "Apio"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "3 duraznos",
+          "4 mitades de nuez de la India",
+          "Zanahoria rallada con limón"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "1 taza de piña picada",
+          "9 pistaches",
+          "Jícama"
+        ],
+        [
+          "1 taza de leche light",
+          "2 mandarinas",
+          "3 mitades de nuez",
+          "Pepino con chile"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "1 taza de papaya",
+          "6 cacahuates",
+          "Jitomate cherry con limón"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "½ plátano tabasco",
+          "5 almendras",
+          "Chayote al vapor frío"
+        ],
+        [
+          "1 taza de leche light",
+          "12 fresas",
+          "2 cdtas de ajonjolí tostado",
+          "Zanahoria"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "1 taza de sandía",
+          "9 pistaches",
+          "Apio con limón"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "3 guayabas",
+          "4 mitades de nuez de la India",
+          "Pepino"
+        ],
+        [
+          "1 taza de leche light",
+          "1 manzana",
+          "6 cacahuates",
+          "Jícama con chile en polvo sin azúcar"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "1 naranja",
+          "3 mitades de nuez",
+          "Pimiento en tiras"
+        ],
+        [
+          "1 taza de yogurt natural sin azúcar",
+          "18 uvas",
+          "5 almendras",
+          "Zanahoria en bastones"
+        ],
+        [
+          "1 taza de leche light",
+          "2 ciruelas",
+          "9 pistaches",
+          "Jitomate cherry"
+        ],
+        [
+          "1 taza de yogurt griego sin azúcar",
+          "1 taza de melón",
+          "2 cdtas de ajonjolí tostado",
+          "Jícama"
+        ]
+      ],
+      "alternativas": [
+        {
+          "titulo": "Lácteo (1 ración)",
+          "opciones": [
+            "1 taza de leche light/descremada",
+            "1 taza de yogurt natural sin azúcar",
+            "1 taza de yogurt griego sin azúcar"
+          ]
+        },
+        {
+          "titulo": "Fruta (1 ración)",
+          "opciones": [
+            "1 manzana",
+            "½ pera",
+            "3 duraznos",
+            "1 taza de papaya",
+            "12 fresas",
+            "2 mandarinas",
+            "1 taza de melón",
+            "1 taza de sandía",
+            "½ plátano tabasco",
+            "18 uvas",
+            "3 guayabas",
+            "1 taza de piña picada",
+            "1 naranja",
+            "2 ciruelas"
+          ]
+        },
+        {
+          "titulo": "Oleaginosas (½ ración)",
+          "opciones": [
+            "5 almendras",
+            "9 pistaches",
+            "3 mitades de nuez",
+            "6 cacahuates",
+            "4 mitades de nuez de la India",
+            "2 cdtas de ajonjolí tostado"
+          ]
+        },
+        {
+          "titulo": "Verdura (libre)",
+          "opciones": [
+            "Pepino",
+            "Jícama",
+            "Zanahoria",
+            "Apio",
+            "Jitomate cherry",
+            "Pimiento en tiras",
+            "Chayote al vapor"
+          ]
+        }
+      ],
+      "omega3": false,
+      "base": [
+        "1 taza de yogurt natural sin azúcar",
+        "1 manzana",
+        "5 almendras",
+        "Pepino con limón al gusto"
+      ]
+    },
+    {
+      "id": "comida",
+      "nombre": "Comida",
+      "icono": "🍗",
+      "raciones": {
+        "verduras": 1,
+        "cereales": 2,
+        "proteinaAnimal": 3,
+        "proteinaVegetal": 1,
+        "grasas": 1
+      },
+      "semana": [
+        [
+          "120 g de pechuga de pollo a la plancha",
+          "½ taza de frijoles",
+          "2 tortillas de maíz",
+          "Ensalada grande (libre)",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pescado blanco a la plancha u horno",
+          "½ taza de lentejas",
+          "⅔ taza de arroz cocido",
+          "Verduras al vapor",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pechuga deshebrada en salsa de jitomate",
+          "½ taza de frijoles",
+          "2 tortillas de maíz",
+          "Nopales asados",
+          "1 cdta de aceite"
+        ],
+        [
+          "90 g de atún en agua en ensalada (lechuga, jitomate, pepino)",
+          "½ taza de garbanzos",
+          "2 tostadas horneadas",
+          "1 cdta de mayonesa light"
+        ],
+        [
+          "120 g de pescado empapelado con verduras",
+          "½ taza de lentejas",
+          "1 taza de pasta de sopa cocida",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "90 g de res sin grasa asada (máx. 1 vez por semana)",
+          "½ taza de frijoles",
+          "⅔ taza de arroz cocido",
+          "Ensalada grande",
+          "1 cdta de aceite"
+        ],
+        [
+          "120 g de pollo al horno sin piel",
+          "½ taza de habas",
+          "1 taza de papa cocida",
+          "Verduras al vapor",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pechuga de pollo en salsa verde",
+          "½ taza de garbanzos",
+          "2 tortillas de maíz",
+          "Calabacitas al vapor",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pescado blanco al mojo de ajo",
+          "½ taza de frijoles",
+          "⅔ taza de arroz cocido",
+          "Ensalada de lechuga y pepino",
+          "1 cdta de aceite"
+        ],
+        [
+          "120 g de queso panela light asado con nopales",
+          "½ taza de lentejas",
+          "2 tortillas de maíz",
+          "Ensalada grande (libre)",
+          "⅓ de aguacate"
+        ],
+        [
+          "90 g de atún en agua con chayote y jitomate",
+          "½ taza de alubias",
+          "1 taza de pasta de sopa cocida",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pollo al horno con hierbas",
+          "½ taza de habas",
+          "1 taza de papa cocida",
+          "Ejotes al vapor",
+          "1 cdta de aceite"
+        ],
+        [
+          "120 g de pescado a la veracruzana (jitomate, cebolla, aceitunas)",
+          "½ taza de garbanzos",
+          "⅔ taza de arroz cocido",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pechuga deshebrada con champiñones",
+          "⅓ taza de frijoles molidos",
+          "2 tostadas horneadas",
+          "Ensalada de espinaca",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pollo a la plancha con rajas de poblano",
+          "½ taza de frijoles",
+          "2 tortillas de maíz",
+          "Ensalada grande",
+          "1 cdta de aceite"
+        ],
+        [
+          "120 g de pescado blanco al horno con limón",
+          "½ taza de lentejas",
+          "1 taza de papa cocida",
+          "Brócoli al vapor",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "90 g de atún en agua en ensalada de espinaca y jitomate",
+          "½ taza de chícharos",
+          "2 tostadas horneadas",
+          "1 cdta de mayonesa light"
+        ],
+        [
+          "120 g de queso panela light en caldillo de jitomate",
+          "½ taza de frijoles",
+          "⅔ taza de arroz cocido",
+          "Nopales asados",
+          "1 cdta de aceite"
+        ],
+        [
+          "120 g de pollo en pipián ligero (sin azúcar)",
+          "½ taza de habas",
+          "2 tortillas de maíz",
+          "Verduras al vapor",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "90 g de res sin grasa en bistec a la mexicana (máx. 1 vez por semana)",
+          "½ taza de lentejas",
+          "2 tortillas de maíz",
+          "Ensalada grande",
+          "1 cdta de aceite"
+        ],
+        [
+          "120 g de pescado empapelado con pimiento y cebolla",
+          "½ taza de garbanzos",
+          "1 taza de pasta de sopa cocida",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pollo a la plancha",
+          "½ taza de alubias",
+          "1 taza de papa cocida",
+          "Ensalada de col y zanahoria",
+          "1 cdta de mayonesa light"
+        ],
+        [
+          "120 g de queso panela light con ensalada de nopal",
+          "½ taza de frijoles",
+          "2 tortillas de maíz",
+          "Jitomate y cebolla",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pescado blanco a la plancha",
+          "½ taza de lentejas",
+          "⅔ taza de arroz cocido",
+          "Acelgas guisadas",
+          "1 cdta de aceite"
+        ],
+        [
+          "120 g de pechuga deshebrada en caldo de verduras",
+          "½ taza de garbanzos",
+          "2 tortillas de maíz",
+          "Zanahoria, chayote y calabaza",
+          "⅓ de aguacate"
+        ],
+        [
+          "90 g de atún en agua con pasta fría y verduras",
+          "½ taza de chícharos",
+          "1 taza de pasta de sopa cocida",
+          "Apio y pepino",
+          "1 cdta de mayonesa light"
+        ],
+        [
+          "120 g de pollo al horno con especias",
+          "⅓ taza de frijoles molidos",
+          "2 tostadas horneadas",
+          "Ensalada grande (libre)",
+          "1 cdta de aceite de oliva"
+        ],
+        [
+          "120 g de pescado en caldo con verduras",
+          "½ taza de habas",
+          "1 taza de papa cocida",
+          "Espinaca y jitomate",
+          "1 cdta de aceite"
+        ]
+      ],
+      "alternativas": [
+        {
+          "titulo": "Proteína (3 raciones)",
+          "opciones": [
+            "120 g de pollo",
+            "120 g de pescado blanco",
+            "90 g de atún en agua",
+            "120 g de queso panela light",
+            "90 g de res sin grasa (máx. 1 vez por semana)"
+          ]
+        },
+        {
+          "titulo": "Leguminosa (1 ración)",
+          "opciones": [
+            "½ taza de frijoles, lentejas, habas o garbanzos cocidos",
+            "⅓ taza de frijoles molidos",
+            "½ taza de alubias",
+            "½ taza de chícharos"
+          ]
+        },
+        {
+          "titulo": "Cereal (2 raciones)",
+          "opciones": [
+            "2 tortillas de maíz",
+            "⅔ taza de arroz",
+            "1 taza de pasta de sopa",
+            "1 taza de papa cocida",
+            "2 tostadas horneadas",
+            "1 taza de camote cocido",
+            "1 bolillo sin migajón"
+          ]
+        },
+        {
+          "titulo": "Grasa (1 ración)",
+          "opciones": [
+            "1 cdta de aceite",
+            "1 cdta de aceite de oliva",
+            "⅓ de aguacate",
+            "1 cdta de mayonesa light",
+            "6 aceitunas"
+          ]
+        },
+        {
+          "titulo": "Verdura (libre)",
+          "opciones": [
+            "Ensalada grande",
+            "Verduras al vapor",
+            "Nopales asados",
+            "Calabacitas",
+            "Ejotes",
+            "Brócoli",
+            "Acelgas",
+            "Chayote",
+            "Espinaca",
+            "Col y zanahoria"
+          ]
+        }
+      ],
+      "omega3": false,
+      "base": [
+        "120 g de pechuga de pollo a la plancha",
+        "½ taza de frijoles",
+        "2 tortillas de maíz",
+        "Ensalada grande (libre)",
+        "1 cdta de aceite de oliva"
+      ]
+    },
+    {
+      "id": "colacion2",
+      "nombre": "Colación de la tarde (post-gym)",
+      "icono": "💪",
+      "raciones": {
+        "verduras": 1,
+        "frutas": 2,
+        "lacteos": 1,
+        "oleaginosas": 0.5
+      },
+      "semana": [
+        [
+          "1 manzana + 3 duraznos (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "5 almendras",
+          "Pepino al gusto"
+        ],
+        [
+          "1 taza de papaya + 12 fresas (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "9 pistaches"
+        ],
+        [
+          "2 mandarinas + ½ pera (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "3 mitades de nuez"
+        ],
+        [
+          "1 taza de melón + 1 taza de sandía (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "5 almendras"
+        ],
+        [
+          "½ plátano tabasco + 1 manzana (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "9 pistaches"
+        ],
+        [
+          "18 uvas + 3 guayabas (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "3 mitades de nuez"
+        ],
+        [
+          "12 fresas + 3 duraznos (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "5 almendras"
+        ],
+        [
+          "1 naranja + 1 taza de piña (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "6 cacahuates",
+          "Pepino"
+        ],
+        [
+          "1 taza de sandía + 2 ciruelas (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "5 almendras",
+          "Jícama"
+        ],
+        [
+          "1 manzana + 1 taza de melón (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "4 mitades de nuez de la India",
+          "Zanahoria"
+        ],
+        [
+          "½ plátano tabasco + 18 uvas (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "9 pistaches",
+          "Apio"
+        ],
+        [
+          "1 taza de papaya + 1 naranja (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "3 mitades de nuez",
+          "Pepino con limón"
+        ],
+        [
+          "3 duraznos + 1 taza de piña (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "6 cacahuates",
+          "Jitomate cherry"
+        ],
+        [
+          "12 fresas + 1 manzana (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "2 cdtas de ajonjolí",
+          "Zanahoria rallada"
+        ],
+        [
+          "2 mandarinas + 1 taza de sandía (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "5 almendras",
+          "Jícama con limón"
+        ],
+        [
+          "3 guayabas + ½ pera (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "9 pistaches",
+          "Pepino"
+        ],
+        [
+          "1 taza de melón + 18 uvas (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "4 mitades de nuez de la India",
+          "Apio con limón"
+        ],
+        [
+          "1 manzana + 2 ciruelas (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "3 mitades de nuez",
+          "Zanahoria"
+        ],
+        [
+          "1 taza de piña + 12 fresas (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "6 cacahuates",
+          "Pepino con chile en polvo sin azúcar"
+        ],
+        [
+          "½ plátano tabasco + 1 taza de papaya (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "5 almendras",
+          "Jícama"
+        ],
+        [
+          "1 naranja + 3 duraznos (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "2 cdtas de ajonjolí",
+          "Jitomate cherry"
+        ],
+        [
+          "1 taza de sandía + 2 mandarinas (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "9 pistaches",
+          "Zanahoria en bastones"
+        ],
+        [
+          "18 uvas + ½ pera (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "3 mitades de nuez",
+          "Pepino"
+        ],
+        [
+          "3 guayabas + 1 taza de melón (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "6 cacahuates",
+          "Apio"
+        ],
+        [
+          "1 manzana + 1 taza de papaya (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "4 mitades de nuez de la India",
+          "Jícama con limón"
+        ],
+        [
+          "12 fresas + 1 naranja (2 frutas después de pesas)",
+          "1 taza de yogurt griego sin azúcar",
+          "5 almendras",
+          "Zanahoria"
+        ],
+        [
+          "2 ciruelas + 1 taza de piña (2 frutas después de pesas)",
+          "1 taza de leche light",
+          "9 pistaches",
+          "Pepino con limón"
+        ],
+        [
+          "3 duraznos + ½ plátano tabasco (2 frutas después de pesas)",
+          "1 taza de yogurt sin azúcar",
+          "2 cdtas de ajonjolí",
+          "Jitomate cherry"
+        ]
+      ],
+      "alternativas": [
+        {
+          "titulo": "Frutas (2 raciones — elige dos)",
+          "opciones": [
+            "1 manzana",
+            "½ pera",
+            "3 duraznos",
+            "1 taza de papaya",
+            "12 fresas",
+            "2 mandarinas",
+            "1 taza de melón",
+            "1 taza de sandía",
+            "½ plátano tabasco",
+            "18 uvas",
+            "3 guayabas",
+            "1 taza de piña picada",
+            "1 naranja",
+            "2 ciruelas"
+          ]
+        },
+        {
+          "titulo": "Lácteo (1 ración)",
+          "opciones": [
+            "1 taza de leche light/descremada",
+            "1 taza de yogurt natural sin azúcar",
+            "1 taza de yogurt griego sin azúcar"
+          ]
+        },
+        {
+          "titulo": "Oleaginosas (½ ración)",
+          "opciones": [
+            "5 almendras",
+            "9 pistaches",
+            "3 mitades de nuez",
+            "6 cacahuates",
+            "4 mitades de nuez de la India",
+            "2 cdtas de ajonjolí tostado"
+          ]
+        },
+        {
+          "titulo": "Verdura (libre)",
+          "opciones": [
+            "Pepino",
+            "Jícama",
+            "Zanahoria",
+            "Apio",
+            "Jitomate cherry"
+          ]
+        }
+      ],
+      "omega3": false,
+      "base": [
+        "1 manzana + 3 duraznos (2 frutas después de pesas)",
+        "1 taza de yogurt sin azúcar",
+        "5 almendras",
+        "Pepino al gusto"
+      ]
+    },
+    {
+      "id": "cena",
+      "nombre": "Cena",
+      "icono": "🌙",
+      "raciones": {
+        "verduras": 1,
+        "cereales": 1,
+        "proteinaAnimal": 2,
+        "grasas": 1
+      },
+      "semana": [
+        [
+          "60–90 g de pollo deshebrado",
+          "1 tortilla de maíz",
+          "Verduras al vapor",
+          "⅓ de aguacate"
+        ],
+        [
+          "Quesadilla: 1 tortilla con 80 g de queso panela",
+          "Nopales asados",
+          "⅓ de aguacate"
+        ],
+        [
+          "60 g de atún en agua sobre 1 tostada horneada",
+          "Ensalada de lechuga y jitomate",
+          "⅓ de aguacate"
+        ],
+        [
+          "1 huevo entero + 2 claras con verduras",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ],
+        [
+          "80 g de queso panela a la plancha con jitomate",
+          "1 rebanada de pan tostado",
+          "Ensalada",
+          "⅓ de aguacate"
+        ],
+        [
+          "Tacos: 60–90 g de pollo deshebrado en 1 tortilla con lechuga y salsa",
+          "⅓ de aguacate"
+        ],
+        [
+          "1 sardina en tomate sobre 1 tostada horneada",
+          "Ensalada",
+          "⅓ de aguacate"
+        ],
+        [
+          "60 g de atún en agua con pepino y jitomate",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ],
+        [
+          "Omelette de 4 claras con espinacas",
+          "1 tostada horneada",
+          "⅓ de aguacate"
+        ],
+        [
+          "80 g de queso panela con rajas de poblano",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ],
+        [
+          "60–90 g de pechuga a la plancha",
+          "1 rebanada de pan de caja tostado",
+          "Ensalada de lechuga y jitomate",
+          "⅓ de aguacate"
+        ],
+        [
+          "1 huevo entero + 2 claras con nopales",
+          "1 tostada horneada",
+          "⅓ de aguacate"
+        ],
+        [
+          "1 sardina en tomate con cebolla morada",
+          "1 tortilla de maíz",
+          "Ensalada",
+          "⅓ de aguacate"
+        ],
+        [
+          "Molletes ligeros: 1 rebanada de pan tostado con 80 g de queso panela gratinado",
+          "Jitomate y cebolla",
+          "⅓ de aguacate"
+        ],
+        [
+          "60 g de atún en agua con apio y zanahoria",
+          "1 tostada horneada",
+          "⅓ de aguacate"
+        ],
+        [
+          "Omelette de 4 claras con champiñones",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ],
+        [
+          "Sincronizada ligera: 1 tortilla con 80 g de queso panela",
+          "Ensalada de col",
+          "⅓ de aguacate"
+        ],
+        [
+          "60–90 g de pollo deshebrado en salsa verde",
+          "1 tostada horneada",
+          "Lechuga y jitomate",
+          "⅓ de aguacate"
+        ],
+        [
+          "1 huevo entero + 2 claras con calabacita",
+          "1 rebanada de pan de caja tostado",
+          "⅓ de aguacate"
+        ],
+        [
+          "80 g de queso panela con ensalada de nopal",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ],
+        [
+          "60 g de atún en agua sobre pepino en rodajas",
+          "1 tostada horneada",
+          "⅓ de aguacate"
+        ],
+        [
+          "Omelette de 4 claras con jitomate y cebolla",
+          "1 rebanada de pan de caja tostado",
+          "⅓ de aguacate"
+        ],
+        [
+          "60–90 g de pollo deshebrado con lechuga y rábano",
+          "1 tostada horneada",
+          "⅓ de aguacate"
+        ],
+        [
+          "1 sardina en tomate con pepino",
+          "1 rebanada de pan de caja tostado",
+          "⅓ de aguacate"
+        ],
+        [
+          "80 g de queso panela a la plancha con espárragos",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ],
+        [
+          "1 huevo entero + 2 claras con ejotes",
+          "1 tostada horneada",
+          "⅓ de aguacate"
+        ],
+        [
+          "60 g de atún en agua con jícama y limón",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ],
+        [
+          "Tacos de queso panela (80 g) con nopal y salsa",
+          "1 tortilla de maíz",
+          "⅓ de aguacate"
+        ]
+      ],
+      "alternativas": [
+        {
+          "titulo": "Proteína (2 raciones)",
+          "opciones": [
+            "Queso panela light 80 g",
+            "Atún en agua 60 g",
+            "1 huevo entero + 2 claras",
+            "4 claras (omelette)",
+            "Sardina en tomate 1 pieza",
+            "Pollo 60–90 g",
+            "Queso cottage 6 cdas",
+            "Requesón 4 cdas"
+          ]
+        },
+        {
+          "titulo": "Cereal (1 ración)",
+          "opciones": [
+            "1 tortilla de maíz",
+            "1 tostada horneada",
+            "1 rebanada de pan de caja",
+            "¾ taza de avena cocida",
+            "⅓ taza de arroz cocido",
+            "½ taza de papa cocida"
+          ]
+        },
+        {
+          "titulo": "Grasa (1 ración)",
+          "opciones": [
+            "⅓ de aguacate",
+            "1 cdta de aceite de oliva",
+            "1 cdta de mayonesa light",
+            "6 aceitunas"
+          ]
+        },
+        {
+          "titulo": "Verdura (libre)",
+          "opciones": [
+            "Verduras al vapor",
+            "Nopales asados",
+            "Ensalada de lechuga y jitomate",
+            "Pepino",
+            "Calabacita",
+            "Champiñones",
+            "Ejotes",
+            "Espárragos",
+            "Col",
+            "Rajas de chile poblano"
+          ]
+        }
+      ],
+      "omega3": true,
+      "base": [
+        "60–90 g de pollo deshebrado",
+        "1 tortilla de maíz",
+        "Verduras al vapor",
+        "⅓ de aguacate"
+      ]
+    }
+  ],
+  "suplemento": {
+    "nombre": "Lysi Omega 3",
+    "indicacion": "1 cucharada cada 12 horas (desayuno y cena), hasta nuevo aviso",
+    "alternativas": [
+      "Lysi Omega 3 Forte: 2 cápsulas al día, 1 cada 12 horas",
+      "Si no es posible: 1 cucharada de aceite de oliva extra virgen en las verduras, cada 12 horas"
+    ]
+  },
+  "recomendaciones": [
+    "Nada de azúcar: evita panes, galletas, pasteles, mermeladas, refrescos y jugos (ni naturales) — come la fruta entera",
+    "Prefiere avena, arroz integral, pasta integral y tortilla de maíz",
+    "Proteínas magras: pollo, pescado, claras de huevo",
+    "Pescado rico en omega 3 (salmón, sardina, atún, trucha) al menos 2 veces por semana",
+    "Carnes rojas máximo 2 veces por semana",
+    "Lácteos siempre descremados (leche, queso, yogurt)",
+    "Horarios fijos de comida, no te malpases: come de 3 a 5 veces al día",
+    "Ejercicio físico 3 a 5 días por semana, 45–60 minutos",
+    "Evita fumar y beber alcohol",
+    "Revisa colesterol y triglicéridos cada 6 meses"
+  ],
+  "notaMedica": "Plan basado en las indicaciones del Instituto Jalisciense de Cancerología. Consulta a tu nutriólogo antes de cambiarlo."
 }

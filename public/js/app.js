@@ -66,12 +66,22 @@
     const dow = strToDate(s).getDay();
     return dow >= 1 && dow <= 5 ? dow : null;
   }
-  const WEEK_NAMES = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-  function weekIndex(s) { return (strToDate(s).getDay() + 6) % 7; } // 0 = lunes
-  // Menú que toca en esa fecha: rota entre las variantes de la semana
+  // Días transcurridos desde el 1/1/1970, en UTC para que no lo mueva el huso
+  function dayNumber(s) {
+    const [y, m, d] = s.split('-').map(Number);
+    return Math.round(Date.UTC(y, m - 1, d) / 86400000);
+  }
+  // Posición del menú dentro del banco de esa comida. Avanza 1 por día natural,
+  // así el ciclo dura tantos días como menús haya (28) en vez de repetirse cada
+  // semana: el lunes que viene ya no cae el mismo menú que este lunes.
+  function menuIndex(comida, s) {
+    const n = (comida.semana || []).length;
+    return n ? ((dayNumber(s) % n) + n) % n : 0;
+  }
+  // Menú que toca en esa fecha
   function menuDelDia(comida, s) {
     if (comida.semana && comida.semana.length) {
-      return comida.semana[weekIndex(s) % comida.semana.length];
+      return comida.semana[menuIndex(comida, s)];
     }
     return comida.base || [];
   }
@@ -293,10 +303,11 @@
       exp.setAttribute('aria-expanded', 'false');
       exp.innerHTML = ICONS.chevD;
 
-      // Alternativas = los siguientes menús completos de la semana (mismas raciones)
+      // Alternativas = los siguientes menús completos del banco (mismas raciones)
       const sem = comida.semana || [];
-      const idx = sem.length ? weekIndex(date) % sem.length : 0;
-      const altMenus = sem.length > 2 ? [1, 2].map((k) => sem[(idx + k) % sem.length]) : [];
+      const idx = menuIndex(comida, date);
+      const nAlt = Math.min(4, Math.max(0, sem.length - 1));
+      const altMenus = Array.from({ length: nAlt }, (_, k) => sem[(idx + k + 1) % sem.length]);
 
       const detail = document.createElement('div');
       detail.className = 'meal-detail hidden';
@@ -432,13 +443,13 @@
       ${dieta.comidas.map((c) => `
         <div class="card">
           <h3>${esc(c.icono)} ${esc(c.nombre)}${c.omega3 ? ' <span class="progress-pill">+ Omega 3</span>' : ''}</h3>
-          <p class="muted" style="margin:0 0 6px">Hoy ${esc(WEEK_NAMES[weekIndex(today)].toLowerCase())}:</p>
+          <p class="muted" style="margin:0 0 6px">Menú de hoy${c.semana && c.semana.length ? ` · ${menuIndex(c, today) + 1} de ${c.semana.length}` : ''}:</p>
           <ul class="meal-list">${menuDelDia(c, today).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
           ${c.semana && c.semana.length > 1 ? `
             <details class="alt">
-              <summary>Ver toda la semana</summary>
+              <summary>Ver los ${c.semana.length} menús</summary>
               ${c.semana.map((items, i) => `
-                <div class="alt-group"><b>${esc(WEEK_NAMES[i] || 'Día ' + (i + 1))}</b><span>${items.map(esc).join(' · ')}</span></div>`).join('')}
+                <div class="alt-group"><b>Menú ${i + 1}</b><span>${items.map(esc).join(' · ')}</span></div>`).join('')}
             </details>` : ''}
           ${c.alternativas && c.alternativas.length ? `
             <details class="alt">
