@@ -145,13 +145,14 @@
     }
   }
 
-  // Botón + región plegable. El contenido va dentro de .collapse-inner
+  // Botón + región plegable. labelHtml ya viene escapado; el contenido va
+  // dentro de .collapse-inner
   let uid = 0;
-  function disclosure(label, inner) {
+  function disclosure(labelHtml, inner) {
     const id = 'c' + (++uid);
     return `
       <button class="disclosure" aria-expanded="false" aria-controls="${id}">
-        <span>${esc(label)}</span><span class="chev">${ICONS.chevD}</span>
+        <span>${labelHtml}</span><span class="chev">${ICONS.chevD}</span>
       </button>
       <div class="collapse" id="${id}" hidden><div class="collapse-inner">${inner}</div></div>`;
   }
@@ -358,11 +359,6 @@
       <div class="timeline" id="timeline"></div>
 
       <div class="card">
-        <div class="card-head"><h2>Omega 3</h2><span class="meta">1 cda cada 12 h</span></div>
-        <div class="toggles" id="supp-checks"></div>
-      </div>
-
-      <div class="card">
         <div class="card-head"><h2>Peso</h2><span class="meta">${day.weight != null ? 'Guardado' : 'Sin registrar'}</span></div>
         <div class="weight-row">
           <label class="weight-field">
@@ -405,9 +401,8 @@
       const menu = menuDelDia(comida, date);
       const sem = comida.semana || [];
       const idx = menuIndex(comida, date);
-      // Alternativas = los siguientes menús completos del banco (mismas raciones)
-      const nAlt = Math.min(4, Math.max(0, sem.length - 1));
-      const altMenus = Array.from({ length: nAlt }, (_, k) => sem[(idx + k + 1) % sem.length]);
+      // Alternativas = los otros platillos sugeridos (mismas raciones)
+      const altMenus = sem.filter((_, k) => k !== idx);
       const regionId = 'meal-' + comida.id;
 
       const row = document.createElement('div');
@@ -417,18 +412,18 @@
         <div class="meal-card">
           <button class="meal-open" aria-expanded="false" aria-controls="${regionId}">
             <span>
-              <span class="meal-name">${esc(comida.nombre)}${comida.omega3 ? '<span class="tag">Omega 3</span>' : ''}</span>
+              <span class="meal-name">${esc(comida.nombre)}</span>
               <span class="meal-dish">${esc(menu[0] || '')}</span>
             </span>
             <span class="chev">${ICONS.chevD}</span>
           </button>
           <div class="collapse" id="${regionId}" hidden>
             <div class="meal-body">
-              <ul class="list">${menu.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+              <ul class="list">${menu.slice(1).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
               ${altMenus.length ? `
-                <p class="alt-title">¿No se te antoja? Cámbialo completo por:</p>
-                ${altMenus.map((items, k) => `
-                  <div class="alt-group"><b>Opción ${k + 1}</b><span>${items.map(esc).join('. ')}</span></div>`).join('')}` : ''}
+                <p class="alt-title">¿No se te antoja? Cámbialo por:</p>
+                ${altMenus.map((items) => `
+                  <div class="alt-group"><b>${esc(items[0])}</b><span>${items.slice(1).map(esc).join('. ')}</span></div>`).join('')}` : ''}
             </div>
           </div>
         </div>`;
@@ -454,33 +449,6 @@
       open.addEventListener('click', () =>
         setCollapse(open, $('#' + regionId, row), open.getAttribute('aria-expanded') !== 'true'));
       timeline.appendChild(row);
-    }
-
-    // Suplemento
-    const suppBox = $('#supp-checks');
-    const doses = [
-      { id: 'manana', label: 'Mañana', sub: 'Con el desayuno' },
-      { id: 'noche', label: 'Noche', sub: 'Con la cena' },
-    ];
-    for (const dose of doses) {
-      const checked = !!day.supplements[dose.id];
-      const btn = document.createElement('button');
-      btn.className = 'toggle' + (checked ? ' on' : '');
-      btn.setAttribute('aria-pressed', String(checked));
-      btn.innerHTML = `<span class="knob">${ICONS.check}</span><span><b>${esc(dose.label)}</b><small>${esc(dose.sub)}</small></span>`;
-      btn.addEventListener('click', async () => {
-        const now = !btn.classList.contains('on');
-        btn.classList.toggle('on', now);
-        btn.setAttribute('aria-pressed', String(now));
-        try {
-          await API.call(`/day/${date}/supplement`, { method: 'PUT', body: { dose: dose.id, checked: now } });
-        } catch (err) {
-          btn.classList.toggle('on', !now);
-          btn.setAttribute('aria-pressed', String(!now));
-          toast(err.message);
-        }
-      });
-      suppBox.appendChild(btn);
     }
 
     // Gym
@@ -573,25 +541,17 @@
         const idx = menuIndex(c, today);
         return `
         <div class="card">
-          <div class="card-head">
-            <h2>${esc(c.nombre)}${c.omega3 ? ' <span class="tag">Omega 3</span>' : ''}</h2>
-            ${sem.length ? `<span class="meta num">Menú ${idx + 1} de ${sem.length}</span>` : ''}
+          <div class="card-head" style="margin-bottom:4px">
+            <h2>${esc(c.nombre)}</h2>
+            <span class="meta">${sem.length} opciones</span>
           </div>
-          <ul class="list">${menuDelDia(c, today).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-          <div class="divider-group" style="margin-top:12px">
-            ${sem.length > 1 ? disclosure(`Ver los ${sem.length} menús`, sem.map((items, i) => `
-              <div class="alt-group${i === idx ? ' current' : ''}"><b>Menú ${i + 1}${i === idx ? ', hoy' : ''}</b><span>${items.map(esc).join('. ')}</span></div>`).join('')) : ''}
-            ${c.alternativas && c.alternativas.length ? disclosure('Equivalencias por ingrediente', c.alternativas.map((a) => `
-              <div class="alt-group"><b>${esc(a.titulo)}</b><span>${a.opciones.map(esc).join(', ')}</span></div>`).join('')) : ''}
+          <div class="divider-group">
+            ${sem.map((items, i) => disclosure(
+              `${esc(items[0])}${i === idx ? ' <span class="tag">Hoy</span>' : ''}`,
+              `<ul class="list">${items.slice(1).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`)).join('')}
           </div>
         </div>`;
       }).join('')}
-
-      <div class="card">
-        <div class="card-head"><h2>Suplemento</h2></div>
-        <p style="margin-bottom:10px"><b>${esc(dieta.suplemento.nombre)}</b>: ${esc(dieta.suplemento.indicacion)}</p>
-        <ul class="list">${dieta.suplemento.alternativas.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
-      </div>
 
       <div class="card">
         <div class="card-head"><h2>Recomendaciones</h2></div>

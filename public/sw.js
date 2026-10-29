@@ -1,5 +1,5 @@
 /* Service worker: cachea los estáticos para abrir rápido; la API siempre va a la red */
-const CACHE = 'vitacontrol-v4';
+const CACHE = 'vitacontrol-v5';
 const ASSETS = [
   '/',
   '/index.html',

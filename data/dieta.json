@@ -22,245 +22,34 @@
       },
       "semana": [
         [
-          "Omelette de 3 huevos con champiñones, espinaca y 40 g de panela",
-          "4 rebanadas de pan tostado",
-          "1 plátano",
-          "1 cdta de aceite"
+          "Omelette con pan, mantequilla y miel",
+          "Omelette de 3 huevos con espinaca o champiñones + 40 g de panela (sin aceite)",
+          "4 rebanadas de pan tostado con 1 cdta de mantequilla (es tu grasa del desayuno)",
+          "2 cdtas de miel (cuenta como 1 de tus 2 frutas)",
+          "½ plátano o 1 taza de fresas"
         ],
         [
-          "3 huevos a la mexicana (jitomate, cebolla, chile) + 40 g de panela asada",
-          "4 tortillas de maíz",
-          "2 tazas de papaya",
-          "1 cdta de aceite"
+          "Tortillas doradas con panela derretida y huevo",
+          "4 tortillas de maíz doradas en comal, sin aceite, con 60 g de panela derretida",
+          "2 huevos revueltos o estrellados con salsa",
+          "1 cdta de aceite para los huevos",
+          "1 plátano o 2 tazas de papaya",
+          "Si se te antojan chilaquiles: las mismas 4 tortillas horneadas en salsa verde con los huevos y la panela"
         ],
         [
-          "3 huevos revueltos con espárragos + 40 g de panela (sartén antiadherente, sin aceite)",
-          "4 rebanadas de pan tostado",
-          "Ensalada de frutas: 1 taza de fresas + 1 manzana, con 2 cdtas de vinagreta casera"
-        ],
-        [
-          "Tacos de huevo: 3 huevos con nopales y cebolla + 40 g de panela",
-          "4 tortillas de maíz",
-          "2 mandarinas + 1 taza de melón",
-          "1 cdta de aceite"
-        ],
-        [
-          "Omelette de 3 huevos con calabacita y cebolla + 40 g de panela",
-          "1⅓ taza de avena en hojuelas cocida con canela",
-          "1 taza de fresas + ½ plátano (sobre la avena)",
-          "1 cdta de aceite"
-        ],
-        [
-          "Sándwiches de huevo: 3 huevos estrellados sin aceite + 40 g de panela, jitomate y lechuga",
-          "4 rebanadas de pan de caja",
-          "1 manzana + 1 taza de papaya",
-          "⅓ de aguacate"
-        ],
-        [
-          "Chilaquiles ligeros: 4 tortillas horneadas en salsa verde con 3 huevos revueltos y 40 g de panela",
-          "Cebolla y cilantro al gusto",
-          "1 taza de mango + 2 mandarinas",
-          "1 cdta de aceite"
-        ],
-        [
-          "3 huevos revueltos con jitomate y espinaca + 40 g de panela",
-          "2 bolillos sin migajón",
-          "1 plátano",
-          "1 cdta de aceite"
-        ],
-        [
-          "Huevos rancheros: 3 huevos estrellados sin aceite sobre tortilla con salsa roja + 40 g de panela",
-          "4 tortillas de maíz",
-          "Ensalada de frutas (2 tazas: papaya, melón y piña) con 2 cdtas de vinagreta casera"
-        ],
-        [
-          "Omelette de 3 huevos con champiñones y cebolla + 40 g de panela",
-          "4 rebanadas de pan tostado",
-          "2 tazas de sandía",
-          "1 cdta de aceite"
-        ],
-        [
-          "3 huevos cocidos + 40 g de panela con jitomate y pepino",
-          "4 rebanadas de pan tostado",
-          "3 kiwis",
-          "1 cdta de aceite de oliva sobre el jitomate"
-        ],
-        [
-          "3 huevos revueltos con chayote y cebolla + 40 g de panela",
-          "4 tortillas de maíz",
-          "1 taza de fresas + 1 manzana",
-          "1 cdta de aceite"
-        ],
-        [
-          "Muffins de huevo al horno: 3 huevos batidos con espinaca, jitomate y 40 g de panela",
-          "4 rebanadas de pan tostado",
-          "2 tazas de papaya",
-          "1 cdta de aceite (para engrasar el molde)"
-        ],
-        [
-          "Sincronizadas: 2 huevos revueltos + 60 g de panela con champiñones",
-          "4 tortillas de maíz",
-          "1 plátano",
-          "1 cdta de aceite"
-        ],
-        [
-          "3 huevos revueltos con ejotes + 40 g de panela (sin aceite)",
-          "4 tortillas de maíz",
-          "Ensalada de frutas (2 tazas: fresa, kiwi y manzana) con 2 cdtas de vinagreta casera"
-        ],
-        [
-          "Omelette de 3 huevos con espárragos y cebolla + 40 g de panela",
-          "1⅓ taza de avena en hojuelas cocida con canela",
-          "¾ taza de blueberries + 1 taza de fresas",
-          "1 cdta de aceite"
-        ],
-        [
-          "3 huevos a la mexicana + 40 g de panela",
-          "8 tostadas horneadas",
-          "2 tazas de melón",
-          "1 cdta de aceite"
-        ],
-        [
-          "3 huevos revueltos con calabacita y jitomate + 40 g de panela",
-          "2 bolillos sin migajón",
-          "1 taza de mango + 1 manzana",
-          "1 cdta de aceite"
-        ],
-        [
-          "2 huevos estrellados + 60 g de panela asada con salsa verde",
-          "4 tortillas de maíz",
-          "1 plátano",
-          "1 cdta de aceite"
-        ],
-        [
-          "Omelette de 3 huevos con espinaca y champiñones + 40 g de panela (sin aceite)",
-          "4 rebanadas de pan de caja tostado",
-          "Ensalada de frutas (2 tazas: papaya, fresa y plátano) con 2 cdtas de vinagreta casera"
-        ],
-        [
-          "3 huevos con nopales a la mexicana + 40 g de panela",
-          "4 tortillas de maíz",
-          "1 taza de fresas + 2 naranjas",
-          "1 cdta de aceite"
-        ],
-        [
-          "Huevos al albañil: 3 huevos en salsa de jitomate y cebolla + 40 g de panela",
-          "4 tortillas de maíz",
-          "2 tazas de papaya",
-          "1 cdta de aceite"
-        ],
-        [
-          "3 huevos revueltos con zanahoria rallada y espinaca + 40 g de panela",
-          "4 rebanadas de pan tostado",
-          "2 duraznos + 1 manzana",
-          "1 cdta de aceite"
-        ],
-        [
-          "Sándwiches de huevo: 3 huevos cocidos rebanados + 40 g de panela, jitomate y lechuga",
-          "4 rebanadas de pan de caja",
-          "Ensalada de frutas (2 tazas: melón, fresa y kiwi) con 2 cdtas de vinagreta casera"
-        ],
-        [
-          "Omelette de 3 huevos con espárragos y champiñones + 40 g de panela",
-          "2 tortillas de maíz + ⅔ taza de avena en hojuelas",
-          "1 plátano",
-          "1 cdta de aceite"
-        ],
-        [
-          "Chilaquiles rojos ligeros: 4 tortillas horneadas en salsa roja con 3 huevos y 40 g de panela",
-          "Cebolla y cilantro al gusto",
-          "2 tazas de sandía",
-          "1 cdta de aceite"
-        ],
-        [
-          "Huevos divorciados: 3 huevos estrellados sin aceite con salsa verde y roja + 40 g de panela",
-          "4 tortillas de maíz",
-          "1 taza de mango + 1 taza de melón",
-          "⅓ de aguacate"
-        ],
-        [
-          "3 huevos revueltos con champiñones y jitomate + 40 g de panela (sin aceite)",
-          "4 rebanadas de pan tostado",
-          "Ensalada de frutas (2 tazas: manzana, fresa y uva) con 2 cdtas de vinagreta casera"
+          "Sándwiches de huevo y panela",
+          "3 huevos (cocidos o estrellados sin aceite) + 40 g de panela",
+          "4 rebanadas de pan de caja con jitomate y lechuga",
+          "⅓ de aguacate",
+          "1 manzana + 1 taza de fresas"
         ]
       ],
-      "alternativas": [
-        {
-          "titulo": "Proteína (4 equivalentes)",
-          "opciones": [
-            "3 huevos + 40 g de panela",
-            "4 huevos",
-            "2 huevos + 60 g de panela",
-            "3 huevos + 30 g de queso light",
-            "2 huevos + 4 claras + 30 g de panela"
-          ]
-        },
-        {
-          "titulo": "Cereal (4 equivalentes)",
-          "opciones": [
-            "4 rebanadas de pan tostado",
-            "4 tortillas de maíz",
-            "4 rebanadas de pan de caja",
-            "1⅓ taza de avena en hojuelas",
-            "2 bolillos sin migajón",
-            "8 tostadas horneadas",
-            "1 taza de arroz cocido",
-            "2 tortillas de harina"
-          ]
-        },
-        {
-          "titulo": "Fruta (2 equivalentes)",
-          "opciones": [
-            "1 plátano",
-            "2 manzanas",
-            "2 tazas de papaya, melón o sandía",
-            "2 tazas de fresas",
-            "Ensalada de frutas de 2 tazas",
-            "1½ taza de piña",
-            "4 mandarinas",
-            "6 guayabas",
-            "3 kiwis",
-            "1 pera"
-          ]
-        },
-        {
-          "titulo": "Grasa (1 equivalente)",
-          "opciones": [
-            "1 cdta de aceite",
-            "⅓ de aguacate",
-            "2 cdtas de vinagreta casera (para la ensalada de frutas)",
-            "1½ cdas de vinagreta comercial",
-            "2 cdas de guacamole",
-            "1 cda de queso Philadelphia",
-            "1 cdta de mayonesa",
-            "5 disparos de aceite en aerosol"
-          ]
-        },
-        {
-          "titulo": "Verdura (½ taza o más)",
-          "opciones": [
-            "Espárragos",
-            "Zanahoria",
-            "Chayote",
-            "Calabacita",
-            "Jitomate",
-            "Cebolla",
-            "Nopales",
-            "Brócoli",
-            "Champiñones",
-            "Espinaca",
-            "Ejotes",
-            "Lechuga",
-            "Pepino"
-          ]
-        }
-      ],
-      "omega3": true,
       "base": [
-        "Omelette de 3 huevos con champiñones, espinaca y 40 g de panela",
-        "4 rebanadas de pan tostado",
-        "1 plátano",
-        "1 cdta de aceite"
+        "Omelette con pan, mantequilla y miel",
+        "Omelette de 3 huevos con espinaca o champiñones + 40 g de panela (sin aceite)",
+        "4 rebanadas de pan tostado con 1 cdta de mantequilla (es tu grasa del desayuno)",
+        "2 cdtas de miel (cuenta como 1 de tus 2 frutas)",
+        "½ plátano o 1 taza de fresas"
       ]
     },
     {
@@ -271,93 +60,22 @@
       },
       "semana": [
         [
-          "1 manzana"
+          "Fruta picada",
+          "1 taza de papaya, melón o sandía con limón y chile"
         ],
         [
-          "1 taza de papaya",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
+          "Fruta entera",
+          "1 manzana, ½ plátano o 2 mandarinas"
         ],
         [
-          "1 taza de fresas"
-        ],
-        [
-          "½ plátano"
-        ],
-        [
-          "2 mandarinas",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
-        ],
-        [
-          "1 taza de melón"
-        ],
-        [
-          "Ensalada de frutas (1 taza: fresa, manzana y kiwi) con limón"
-        ],
-        [
-          "1 taza de sandía",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
-        ],
-        [
-          "3 guayabas"
-        ],
-        [
-          "¾ taza de piña"
-        ],
-        [
-          "1 taza de uvas",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
-        ],
-        [
-          "½ pera"
-        ],
-        [
-          "1 toronja"
-        ],
-        [
-          "1 taza de mango",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
+          "Ensalada de frutas con vinagreta",
+          "1 taza de fresa, manzana y kiwi",
+          "2 cdtas de vinagreta casera (quita 1 cdta de aceite de la comida)"
         ]
       ],
-      "alternativas": [
-        {
-          "titulo": "Fruta (1 equivalente)",
-          "opciones": [
-            "1 manzana",
-            "½ plátano",
-            "1 taza de papaya, melón o sandía",
-            "1 taza de fresas",
-            "1 taza de mango",
-            "¾ taza de piña",
-            "1 taza de uvas",
-            "2 mandarinas",
-            "2 naranjas",
-            "3 guayabas",
-            "1½ kiwi",
-            "½ pera",
-            "2 duraznos",
-            "1 toronja",
-            "¾ taza de blueberries"
-          ]
-        },
-        {
-          "titulo": "Libres (cuando quieras)",
-          "opciones": [
-            "Pepino, jícama o apio con limón y Tajín",
-            "Gelatina light",
-            "Café americano o té sin azúcar",
-            "Agua natural"
-          ]
-        },
-        {
-          "titulo": "¿Ensalada de frutas con vinagreta?",
-          "opciones": [
-            "Ponle 2 cdtas de vinagreta casera y quita 1 cdta de aceite de la comida o la cena"
-          ]
-        }
-      ],
-      "omega3": false,
       "base": [
-        "1 manzana"
+        "Fruta picada",
+        "1 taza de papaya, melón o sandía con limón y chile"
       ]
     },
     {
@@ -371,238 +89,32 @@
       },
       "semana": [
         [
-          "Pechuga de pollo a la plancha (180 g) con cebolla asada",
+          "Pollo asado con arroz y tortillas",
+          "180 g de pechuga de pollo asada",
           "½ taza de arroz + 3 tortillas de maíz",
-          "Ensalada de jitomate, pepino y lechuga",
+          "Verduras libres (mín. 1 taza): ensalada, calabaza, zanahoria, chayote",
           "⅓ de aguacate + 1 cdta de aceite"
         ],
         [
-          "Pasta con pollo: 180 g de pechuga en cubos salteada con jitomate, cebolla, ajo y espinaca",
+          "Pasta con pollo",
+          "180 g de pechuga en cubos salteada con jitomate, cebolla y espinaca",
           "1⅔ taza de pasta cocida",
-          "Ensalada verde",
+          "Ensalada o calabaza gratinada con 30 g de queso (si gratinas, quita el aceite)",
           "2 cdtas de aceite de oliva"
         ],
         [
-          "Fajitas de pollo (180 g) con pimiento y cebolla",
-          "3 tortillas de maíz + ½ taza de arroz",
-          "Nopales asados",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Fajitas de res con nopales a la mexicana (180 g de bistec magro), tu carne roja de la semana",
-          "½ taza de arroz + 3 tortillas de maíz",
-          "Sopa de verduras o ensalada",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Pollo al horno (150 g) + calabaza gratinada con 30 g de queso Oaxaca",
-          "1 taza de arroz + 1 tortilla de maíz",
-          "Zanahoria y chayote al vapor",
-          "Sin aceite extra (el queso gratinado cuenta como tu grasa)"
-        ],
-        [
-          "Caldo de pollo con chayote, zanahoria y calabacita (180 g de pechuga)",
-          "½ taza de arroz en el caldo + 3 tortillas de maíz",
-          "Las verduras del caldo (sírvete bastantes)",
-          "⅔ de aguacate"
-        ],
-        [
-          "Tacos de pollo deshebrado (180 g) en salsa verde",
-          "5 tortillas de maíz",
-          "Cebolla, cilantro y ensalada de nopal",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Pollo a la mostaza (180 g) con espárragos asados",
-          "1 papa mediana al horno + 3 tortillas de maíz",
-          "Ensalada verde",
-          "2 cdtas de aceite de oliva"
-        ],
-        [
-          "Filete de pescado a la veracruzana (240 g) con jitomate y cebolla",
-          "½ taza de arroz + 3 tortillas de maíz",
-          "Ensalada verde",
-          "2 cdtas de aceite"
-        ],
-        [
-          "Pollo en salsa roja (180 g) con calabacitas",
-          "1¼ taza de arroz",
+          "Pollo empanizado al horno o air fryer",
+          "180 g de pechuga empanizada con 3 cdas de pan molido (cuentan como 1 cereal)",
+          "1 taza de arroz o 4 tortillas de maíz",
           "Verduras libres (mín. 1 taza)",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Bistec a la mexicana (180 g de bistec magro), tu carne roja de la semana",
-          "½ taza de arroz + 3 tortillas de maíz",
-          "Chayote y zanahoria al vapor",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Hamburguesa de pollo (180 g de pechuga molida) con jitomate, cebolla y lechuga",
-          "1 pan de hamburguesa + 1 papa mediana en gajos al horno",
-          "Ensalada verde",
-          "⅓ de aguacate + 1 cdta de mayonesa"
-        ],
-        [
-          "Enchiladas verdes de pollo al horno (180 g)",
-          "5 tortillas de maíz",
-          "Lechuga, cebolla y rábano",
-          "1 cda de crema + 1 cdta de aceite"
-        ],
-        [
-          "Ensalada de pasta con atún: 2 latas de atún en agua, zanahoria, chayote y jitomate",
-          "1⅔ taza de pasta cocida",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de mayonesa"
-        ],
-        [
-          "Pollo teriyaki casero (180 g, con salsa de soya, ajo y jengibre)",
-          "1¼ taza de arroz",
-          "Brócoli y zanahoria salteados",
-          "2 cdtas de aceite"
-        ],
-        [
-          "Tinga de pollo (180 g) con jitomate y cebolla",
-          "6 tostadas horneadas + ½ taza de arroz",
-          "Lechuga picada",
-          "⅓ de aguacate + 1 cda de crema"
-        ],
-        [
-          "Pollo asado (180 g) con calabacita, cebolla y pimiento a la parrilla",
-          "1 papa mediana + 3 tortillas de maíz",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de aceite de oliva"
-        ],
-        [
-          "Carne asada (180 g de bistec magro) con nopales y cebollitas, tu carne roja de la semana",
-          "5 tortillas de maíz",
-          "Ensalada de nopal",
-          "4 cdas de guacamole"
-        ],
-        [
-          "Sopa de fideo + pechuga de pollo a la plancha (180 g)",
-          "⅔ taza de fideo cocido + 3 tortillas de maíz",
-          "Ensalada verde",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Camarones al ajillo (36 camarones medianos) con espárragos",
-          "1¼ taza de arroz",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de aceite de oliva"
-        ],
-        [
-          "Pechuga rellena de espinaca y champiñones (180 g)",
-          "1⅔ taza de pasta cocida en salsa de jitomate",
-          "Ensalada verde",
-          "2 cdtas de aceite"
-        ],
-        [
-          "Brochetas de pollo (180 g) con cebolla, pimiento y jitomate",
-          "½ taza de arroz + 3 tortillas de maíz",
-          "Verduras libres (mín. 1 taza)",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Pasta con pollo (150 g) + calabaza gratinada con 30 g de queso Oaxaca",
-          "1⅔ taza de pasta cocida",
-          "Ensalada de jitomate y cebolla",
-          "Sin aceite extra (el queso gratinado cuenta como tu grasa)"
-        ],
-        [
-          "Pescado empapelado (240 g) con jitomate, cebolla y chile",
-          "½ taza de arroz + 3 tortillas de maíz",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de aceite"
-        ],
-        [
-          "Bistec encebollado (180 g de bistec magro), tu carne roja de la semana",
-          "1 papa mediana + 3 tortillas de maíz",
-          "Chayote al vapor",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Pollo con champiñones y cebolla (180 g)",
-          "1⅔ taza de pasta cocida",
-          "Ensalada verde",
-          "2 cdtas de aceite"
-        ],
-        [
-          "Tacos de pollo adobado (180 g) con cebolla y cilantro",
-          "5 tortillas de maíz",
-          "Nopales o ensalada",
-          "4 cdas de guacamole"
-        ],
-        [
-          "Pollo a la plancha (180 g) con espárragos, zanahoria y chayote salteados",
-          "1¼ taza de arroz",
-          "Verduras libres (mín. 1 taza)",
-          "⅓ de aguacate + 1 cdta de aceite"
+          "Aceite en aerosol para dorar + ⅓ de aguacate"
         ]
       ],
-      "alternativas": [
-        {
-          "titulo": "Proteína (6 equivalentes)",
-          "opciones": [
-            "180 g de pechuga de pollo",
-            "240 g de filete de pescado",
-            "2 latas de atún en agua",
-            "36 camarones",
-            "12 claras",
-            "150 g de pollo + 30 g de panela (quita 1 grasa)",
-            "180 g de bistec de res magro (máx. 1–2 veces por semana)"
-          ]
-        },
-        {
-          "titulo": "Cereal (5 equivalentes)",
-          "opciones": [
-            "5 tortillas de maíz",
-            "½ taza de arroz + 3 tortillas",
-            "1¼ taza de arroz cocido",
-            "1⅔ taza de pasta cocida",
-            "1 papa mediana + 3 tortillas",
-            "10 tostadas horneadas",
-            "2½ tortillas de harina",
-            "1 pan de hamburguesa + 1 papa mediana"
-          ]
-        },
-        {
-          "titulo": "Grasa (2 equivalentes)",
-          "opciones": [
-            "⅓ de aguacate + 1 cdta de aceite",
-            "2 cdtas de aceite de oliva",
-            "⅔ de aguacate",
-            "4 cdas de guacamole",
-            "4 cdtas de vinagreta casera",
-            "3 cdas de vinagreta comercial",
-            "2 cdtas de mayonesa",
-            "1 cda de crema + 1 cdta de aceite",
-            "1 cda de aderezo (ranch, César)"
-          ]
-        },
-        {
-          "titulo": "Verdura (mín. 1 taza, sin máximo)",
-          "opciones": [
-            "Espárragos",
-            "Zanahoria",
-            "Chayote",
-            "Calabacita",
-            "Jitomate",
-            "Cebolla",
-            "Nopales",
-            "Brócoli",
-            "Champiñones",
-            "Espinaca",
-            "Ejotes",
-            "Lechuga",
-            "Pepino"
-          ]
-        }
-      ],
-      "omega3": false,
       "base": [
-        "Pechuga de pollo a la plancha (180 g) con cebolla asada",
+        "Pollo asado con arroz y tortillas",
+        "180 g de pechuga de pollo asada",
         "½ taza de arroz + 3 tortillas de maíz",
-        "Ensalada de jitomate, pepino y lechuga",
+        "Verduras libres (mín. 1 taza): ensalada, calabaza, zanahoria, chayote",
         "⅓ de aguacate + 1 cdta de aceite"
       ]
     },
@@ -614,93 +126,22 @@
       },
       "semana": [
         [
-          "2 mandarinas"
+          "Fruta entera",
+          "1 manzana, ½ plátano o 2 mandarinas"
         ],
         [
-          "1 taza de melón",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
+          "Ensalada de frutas con vinagreta",
+          "1 taza de fresa, manzana y kiwi",
+          "2 cdtas de vinagreta casera (quita 1 cdta de aceite de la cena)"
         ],
         [
-          "1 manzana"
-        ],
-        [
-          "Ensalada de frutas (1 taza: papaya, melón y piña) con limón y chile"
-        ],
-        [
-          "1 taza de fresas",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
-        ],
-        [
-          "½ plátano"
-        ],
-        [
-          "1 taza de sandía"
-        ],
-        [
-          "2 duraznos",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
-        ],
-        [
-          "1 taza de papaya"
-        ],
-        [
-          "1½ kiwi"
-        ],
-        [
-          "1 taza de uvas",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
-        ],
-        [
-          "¾ taza de blueberries"
-        ],
-        [
-          "2 naranjas"
-        ],
-        [
-          "Ensalada de frutas (1 taza: fresa, manzana y uva) con limón",
-          "Opcional (libre): pepino o jícama con limón y Tajín"
+          "Fruta picada",
+          "1 taza de papaya, melón o sandía con limón y chile"
         ]
       ],
-      "alternativas": [
-        {
-          "titulo": "Fruta (1 equivalente)",
-          "opciones": [
-            "1 manzana",
-            "½ plátano",
-            "1 taza de papaya, melón o sandía",
-            "1 taza de fresas",
-            "1 taza de mango",
-            "¾ taza de piña",
-            "1 taza de uvas",
-            "2 mandarinas",
-            "2 naranjas",
-            "3 guayabas",
-            "1½ kiwi",
-            "½ pera",
-            "2 duraznos",
-            "1 toronja",
-            "¾ taza de blueberries"
-          ]
-        },
-        {
-          "titulo": "Libres (cuando quieras)",
-          "opciones": [
-            "Pepino, jícama o apio con limón y Tajín",
-            "Gelatina light",
-            "Café americano o té sin azúcar",
-            "Agua natural"
-          ]
-        },
-        {
-          "titulo": "¿Ensalada de frutas con vinagreta?",
-          "opciones": [
-            "Ponle 2 cdtas de vinagreta casera y quita 1 cdta de aceite de la comida o la cena"
-          ]
-        }
-      ],
-      "omega3": false,
       "base": [
-        "2 mandarinas"
+        "Fruta entera",
+        "1 manzana, ½ plátano o 2 mandarinas"
       ]
     },
     {
@@ -714,261 +155,42 @@
       },
       "semana": [
         [
-          "Sándwiches de pollo (150 g) con jitomate, cebolla, lechuga y jalapeño",
-          "4 rebanadas de pan de caja",
-          "Verduras libres (mín. 1 taza)",
+          "Sándwiches de pollo",
+          "150 g de pechuga de pollo a la plancha o deshebrada",
+          "4 rebanadas de pan de caja con jitomate, cebolla, lechuga y jalapeño",
           "⅓ de aguacate + 1½ cdas de vinagreta comercial"
         ],
         [
-          "Tacos de pollo (150 g) con nopales",
-          "4 tortillas de maíz",
-          "Nopales y pico de gallo",
-          "4 cdas de guacamole"
+          "Tortas de pollo",
+          "150 g de pollo deshebrado",
+          "2 bolillos sin migajón",
+          "Jitomate, cebolla y lechuga al gusto",
+          "⅓ de aguacate + 1 cdta de mayonesa"
         ],
         [
-          "Calabacitas gratinadas con 120 g de pollo y 30 g de queso Oaxaca",
+          "Pan tostado con huevo y jamón de pavo",
+          "2 huevos revueltos + 6 rebanadas de jamón de pavo (sin aceite; el huevo cubre tus 2 grasas)",
           "4 rebanadas de pan tostado",
-          "Jitomate y cebolla",
-          "Sin aceite extra (el queso gratinado cuenta como tu grasa)"
-        ],
-        [
-          "Pasta con pollo (150 g), jitomate, espinaca y champiñones",
-          "1⅓ taza de pasta cocida",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de aceite de oliva"
-        ],
-        [
-          "Ensalada grande de pollo (150 g) con espárragos, jitomate, zanahoria y lechuga",
-          "4 rebanadas de pan tostado",
-          "La ensalada (sin límite)",
-          "4 cdtas de vinagreta casera"
-        ],
-        [
-          "Quesadillas de pollo (120 g) con 30 g de panela",
-          "4 tortillas de maíz",
-          "Ensalada y salsa",
-          "1 cdta de aceite (la panela cuenta como la otra grasa)"
-        ],
-        [
-          "Omelette de 2 huevos con 90 g de pollo deshebrado y espinaca",
-          "4 rebanadas de pan tostado",
-          "Jitomate rebanado",
-          "Sin aceite (los huevos cuentan como tus 2 grasas)"
-        ],
-        [
-          "Wraps de pollo (150 g) con lechuga, jitomate y zanahoria",
-          "2 tortillas de harina",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de mayonesa"
-        ],
-        [
-          "Tostadas de atún (1⅔ latas en agua) con jitomate, cebolla y pepino",
-          "8 tostadas horneadas",
-          "Verduras libres (mín. 1 taza)",
-          "⅓ de aguacate + 1 cdta de mayonesa"
-        ],
-        [
-          "Pechuga a la plancha (150 g) con espárragos",
-          "1 taza de arroz",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de aceite de oliva"
-        ],
-        [
-          "Caldo de pollo con verduras (150 g de pechuga)",
-          "4 tortillas de maíz",
-          "Las verduras del caldo (sírvete bastantes)",
-          "⅔ de aguacate"
-        ],
-        [
-          "Club sándwich: 120 g de pollo + 2 rebanadas de jamón de pavo",
-          "4 rebanadas de pan de caja",
-          "Lechuga y jitomate",
-          "⅓ de aguacate + 1 cdta de mayonesa"
-        ],
-        [
-          "Pescado empapelado (200 g) con verduras",
-          "4 tortillas de maíz",
-          "Verduras libres (mín. 1 taza)",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Ensalada fría de pasta con pollo (150 g), chayote, zanahoria y jitomate",
-          "1⅓ taza de pasta cocida",
-          "Verduras libres (mín. 1 taza)",
-          "4 cdtas de vinagreta casera"
-        ],
-        [
-          "Pizza en tortilla de harina: salsa de jitomate, 120 g de pollo, 30 g de queso Oaxaca, champiñones y cebolla",
-          "2 tortillas de harina",
-          "Ensalada verde",
-          "Sin aceite extra (el queso cuenta como tu grasa)"
-        ],
-        [
-          "Pollo en salsa verde (150 g) con chayote",
-          "1 taza de arroz",
-          "Verduras libres (mín. 1 taza)",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Bowl de pollo (150 g) con pico de gallo y lechuga",
-          "1 taza de arroz",
-          "Jitomate, cebolla y lechuga",
-          "4 cdas de guacamole"
-        ],
-        [
-          "Hamburguesa de pollo (150 g)",
-          "1 pan de hamburguesa + ½ papa al horno",
-          "Ensalada verde",
-          "⅓ de aguacate + 1 cdta de mayonesa"
-        ],
-        [
-          "Calabaza gratinada con 30 g de queso Oaxaca + 120 g de pollo a la plancha",
-          "4 tortillas de maíz",
-          "Jitomate y cebolla",
-          "Sin aceite extra (el queso gratinado cuenta como tu grasa)"
-        ],
-        [
-          "Brochetas de pollo (150 g) con cebolla y pimiento",
-          "1 taza de arroz",
-          "Verduras libres (mín. 1 taza)",
-          "2 cdtas de aceite"
-        ],
-        [
-          "Omelette de 2 huevos con 90 g de pollo, champiñones y espárragos",
-          "4 tortillas de maíz",
-          "Salsa y jitomate",
-          "Sin aceite (los huevos cuentan como tus 2 grasas)"
-        ],
-        [
-          "Tacos de pescado (200 g) con col y pico de gallo",
-          "4 tortillas de maíz",
-          "Col y pico de gallo",
-          "⅓ de aguacate + 1 cda de crema"
-        ],
-        [
-          "Ensalada César de pollo (150 g) con lechuga y jitomate",
-          "4 rebanadas de pan tostado (en crutones)",
-          "La ensalada (sin límite)",
-          "1 cda de aderezo César"
-        ],
-        [
-          "Pollo a la mexicana (150 g)",
-          "4 tortillas de maíz",
-          "Nopales",
-          "⅓ de aguacate + 1 cdta de aceite"
-        ],
-        [
-          "Wraps de pollo (150 g) con espárragos y zanahoria",
-          "2 tortillas de harina",
-          "Verduras libres (mín. 1 taza)",
-          "⅓ de aguacate + 1 cdta de mayonesa"
-        ],
-        [
-          "Pasta con 120 g de pollo y calabaza gratinada con 30 g de queso Oaxaca",
-          "1⅓ taza de pasta cocida",
-          "Ensalada verde",
-          "Sin aceite extra (el queso gratinado cuenta como tu grasa)"
-        ],
-        [
-          "Quesadillas de pollo (120 g) con 30 g de panela y champiñones",
-          "4 tortillas de maíz",
-          "Ensalada y salsa",
-          "1 cdta de aceite (la panela cuenta como la otra grasa)"
-        ],
-        [
-          "Tacos de pollo (150 g) con chayote y zanahoria salteados",
-          "4 tortillas de maíz",
-          "Chayote y zanahoria",
-          "4 cdas de guacamole"
+          "Jitomate y pepino al gusto"
         ]
       ],
-      "alternativas": [
-        {
-          "titulo": "Proteína (5 equivalentes)",
-          "opciones": [
-            "150 g de pechuga de pollo",
-            "200 g de filete de pescado",
-            "1⅔ latas de atún en agua",
-            "30 camarones",
-            "10 claras",
-            "120 g de pollo + 30 g de panela (quita 1 grasa)",
-            "90 g de pollo + 2 huevos (quita las 2 grasas)",
-            "150 g de bistec de res magro (si no la comiste esta semana)"
-          ]
-        },
-        {
-          "titulo": "Cereal (4 equivalentes)",
-          "opciones": [
-            "4 rebanadas de pan de caja",
-            "4 tortillas de maíz",
-            "4 rebanadas de pan tostado",
-            "1 taza de arroz cocido",
-            "1⅓ taza de pasta cocida",
-            "2 tortillas de harina",
-            "8 tostadas horneadas",
-            "2 bolillos sin migajón"
-          ]
-        },
-        {
-          "titulo": "Grasa (2 equivalentes)",
-          "opciones": [
-            "⅓ de aguacate + 1 cdta de aceite",
-            "2 cdtas de aceite de oliva",
-            "⅔ de aguacate",
-            "4 cdas de guacamole",
-            "4 cdtas de vinagreta casera",
-            "3 cdas de vinagreta comercial",
-            "2 cdtas de mayonesa",
-            "1 cda de crema + 1 cdta de aceite",
-            "1 cda de aderezo (ranch, César)"
-          ]
-        },
-        {
-          "titulo": "Verdura (mín. 1 taza, sin máximo)",
-          "opciones": [
-            "Espárragos",
-            "Zanahoria",
-            "Chayote",
-            "Calabacita",
-            "Jitomate",
-            "Cebolla",
-            "Nopales",
-            "Brócoli",
-            "Champiñones",
-            "Espinaca",
-            "Ejotes",
-            "Lechuga",
-            "Pepino"
-          ]
-        }
-      ],
-      "omega3": true,
       "base": [
-        "Sándwiches de pollo (150 g) con jitomate, cebolla, lechuga y jalapeño",
-        "4 rebanadas de pan de caja",
-        "Verduras libres (mín. 1 taza)",
+        "Sándwiches de pollo",
+        "150 g de pechuga de pollo a la plancha o deshebrada",
+        "4 rebanadas de pan de caja con jitomate, cebolla, lechuga y jalapeño",
         "⅓ de aguacate + 1½ cdas de vinagreta comercial"
       ]
     }
   ],
-  "suplemento": {
-    "nombre": "Lysi Omega 3",
-    "indicacion": "1 cucharada cada 12 horas (desayuno y cena), hasta nuevo aviso",
-    "alternativas": [
-      "Lysi Omega 3 Forte: 2 cápsulas al día, 1 cada 12 horas",
-      "Si no es posible: 1 cucharada de aceite de oliva extra virgen en las verduras, cada 12 horas"
-    ]
-  },
   "recomendaciones": [
     "Agrega mínimo 1 taza de verduras en la comida y la cena (no hay máximo): en sopa, ensalada, salteadas o en air fryer",
-    "Toma 2 L de agua al día (8 vasos) y líquidos con tus comidas",
-    "Tu proteína base es el pollo; carne roja (res) solo 1 o 2 veces por semana",
-    "30 g de panela o queso equivalen a 1 de proteína + 1 de grasa: si gratinas o le pones panela, quita 1 cdta de aceite o ⅓ de aguacate de esa comida",
-    "Prefiere cereales integrales, fruta fresca entera y verduras crudas o con menos de 10 min de cocción",
-    "Cocina al vapor, asado, a la plancha, horneado, salteado o en air fryer. Evita frito, capeado y empanizado",
-    "Grasas vegetales (aceite de oliva, aguacate, vinagreta casera); evita manteca y mantequilla",
-    "Libres: café americano, limón, ajo, cilantro y cebolla como condimento, mostaza, salsas, vinagre, especias, gelatina light",
-    "Pescado o atún al menos 1–2 veces por semana",
+    "Toma 2 L de agua al día (8 vasos)",
+    "Tu proteína base es el pollo. Res solo 1 o 2 veces por semana: 180 g de bistec en lugar del pollo de la comida",
+    "Empanizado sí, pero al horno o en air fryer; frito no",
+    "La miel o mermelada (2 cdtas) cuenta como 1 fruta: si la usas, come solo 1 fruta en ese desayuno",
+    "30 g de panela o queso gratinado cuentan como proteína y grasa: ese día quita 1 cdta de aceite o ⅓ de aguacate",
+    "Pan: 1 rebanada de pan de caja o tostado = 1 tortilla = ½ bolillo sin migajón",
+    "Pescado o atún 1 a 2 veces por semana",
     "Revisa colesterol y triglicéridos cada 6 meses"
   ],
   "notaMedica": "Menús armados con tu plan de equivalentes. Consulta a tu nutriólogo antes de cambiar las porciones."

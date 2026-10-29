@@ -268,7 +268,7 @@ button { touch-action: manipulation; }
   text-align: left;
   cursor: pointer;
 }
-.disclosure + .collapse { margin-bottom: 0; }
+.disclosure > span:first-child { display: flex; align-items: center; gap: 8px; padding: 12px 0; }
 .disclosure .chev {
   width: 32px; height: 32px;
   border-radius: 50%;
@@ -512,42 +512,6 @@ button { touch-action: manipulation; }
   font-weight: 600;
 }
 
-/* Interruptores (Omega 3) */
-.toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 56px;
-  padding: 10px 14px;
-  border-radius: var(--radius-inner);
-  border: none;
-  background: var(--raised);
-  text-align: left;
-  cursor: pointer;
-  transition: background-color 220ms ease, transform 140ms var(--ease-out);
-}
-.toggle:active { transform: scale(0.97); }
-.toggle .knob {
-  flex: none;
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  border: 2px solid var(--control);
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-ink);
-  transition: background-color 220ms ease, border-color 220ms ease;
-}
-.toggle .knob svg { width: 15px; height: 15px; }
-.toggle .knob svg path { stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 240ms var(--ease-out) 40ms; }
-.toggle b { display: block; font-weight: 600; font-size: 15px; }
-.toggle small { display: block; color: var(--muted); font-size: 13px; }
-.toggle.on { background: var(--accent-soft); }
-.toggle.on .knob { background: var(--accent); border-color: var(--accent); }
-.toggle.on .knob svg path { stroke-dashoffset: 0; }
-
 /* Peso */
 .weight-row { display: flex; gap: 10px; align-items: center; }
 .weight-field {
@@ -782,6 +746,6 @@ button { touch-action: manipulation; }
   .login-card.shake { animation: none; }
   .tab-indicator, .bar > span, .collapse { transition-duration: 0ms; }
   .toast { transform: translate(-50%, 0); }
-  .btn:active, .pin-key:active, .node:active, .toggle:active, .seg:active, .day:active,
+  .btn:active, .pin-key:active, .node:active, .seg:active, .day:active,
   .video-btn:active, .done-row:active, .tab:active svg { transform: none; }
 }
