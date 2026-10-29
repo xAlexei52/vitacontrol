@@ -30,18 +30,20 @@
     calMonth: null,         // Date del mes visible en calendario
     chartRange: 30,
     chart: null,
+    tab: null,              // pestaña mostrada, para animar solo al cambiar
   };
 
   const MEAL_ORDER = ['desayuno', 'colacion1', 'comida', 'colacion2', 'cena'];
-  const DOW = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+  const TABS = ['hoy', 'dieta', 'gym', 'progreso'];
 
   const ICONS = {
-    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
     play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
-    chevL: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
-    chevR: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
-    chevD: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+    chevL: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
+    chevR: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
+    chevD: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
     timer: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>',
+    mark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>',
   };
 
   // ---------- Utilidades de fecha (siempre hora local) ----------
@@ -60,6 +62,9 @@
   }
   function fmtLong(s) {
     return strToDate(s).toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+  }
+  function mondayOf(s) {
+    return addDays(s, -((strToDate(s).getDay() + 6) % 7));
   }
   // Lunes=1 ... Viernes=5 → día de rutina sugerido; sáb/dom → null
   function suggestedRoutineDay(s) {
@@ -90,21 +95,92 @@
     div.textContent = t;
     return div.innerHTML;
   }
+  const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- Animaciones ----------
+  // Reinicia una animación CSS de entrada (al cambiar de pestaña o de día)
+  function enter(el) {
+    el.classList.remove('view-enter');
+    void el.offsetWidth;
+    el.classList.add('view-enter');
+  }
+
+  // Abre o cierra un plegable midiendo su alto real; si se interrumpe a medio
+  // camino, parte del alto actual en vez de saltar.
+  function setCollapse(btn, region, open) {
+    btn.setAttribute('aria-expanded', String(open));
+    if (reduceMotion()) {
+      region.hidden = !open;
+      region.style.height = '';
+      region.style.opacity = '';
+      return;
+    }
+    const done = (fn) => {
+      const finish = (e) => {
+        if (e && e.propertyName !== 'height') return;
+        region.removeEventListener('transitionend', finish);
+        clearTimeout(t);
+        fn();
+      };
+      const t = setTimeout(finish, 400);
+      region.addEventListener('transitionend', finish);
+    };
+    if (open) {
+      const from = region.hidden ? 0 : region.getBoundingClientRect().height;
+      region.hidden = false;
+      region.style.height = 'auto';
+      const to = region.scrollHeight;
+      region.style.height = from + 'px';
+      region.style.opacity = '0';
+      void region.offsetHeight;
+      region.style.height = to + 'px';
+      region.style.opacity = '1';
+      done(() => { if (btn.getAttribute('aria-expanded') === 'true') region.style.height = ''; });
+    } else {
+      region.style.height = region.getBoundingClientRect().height + 'px';
+      void region.offsetHeight;
+      region.style.height = '0px';
+      region.style.opacity = '0';
+      done(() => { if (btn.getAttribute('aria-expanded') === 'false') region.hidden = true; });
+    }
+  }
+
+  // Botón + región plegable. El contenido va dentro de .collapse-inner
+  let uid = 0;
+  function disclosure(label, inner) {
+    const id = 'c' + (++uid);
+    return `
+      <button class="disclosure" aria-expanded="false" aria-controls="${id}">
+        <span>${esc(label)}</span><span class="chev">${ICONS.chevD}</span>
+      </button>
+      <div class="collapse" id="${id}" hidden><div class="collapse-inner">${inner}</div></div>`;
+  }
+  function wireDisclosures(root) {
+    root.querySelectorAll('.disclosure').forEach((btn) => {
+      const region = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.addEventListener('click', () => setCollapse(btn, region, btn.getAttribute('aria-expanded') !== 'true'));
+    });
+  }
+
+  function appHead() {
+    return `<div class="app-head"><span class="mark">${ICONS.mark}</span>VitaControl</div>`;
+  }
 
   // ---------- Toast ----------
   let toastTimer = null;
   function toast(msg) {
     const el = $('#toast');
     el.textContent = msg;
-    el.classList.remove('hidden');
+    el.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.add('hidden'), 2200);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
   }
 
   // ---------- Auth ----------
   function logout() {
     API.token = null;
     localStorage.removeItem('vc_token');
+    state.tab = null;
     $('#app').classList.add('hidden');
     $('#view-login').classList.remove('hidden');
   }
@@ -184,36 +260,81 @@
 
   function render() {
     clearInterval(state.gymTimer);
-    const tab = (location.hash || '#hoy').slice(1);
+    let tab = (location.hash || '#hoy').slice(1);
+    if (!TABS.includes(tab)) tab = 'hoy';
     document.querySelectorAll('.tab').forEach((el) => {
-      el.classList.toggle('active', el.dataset.tab === tab);
+      const on = el.dataset.tab === tab;
+      el.classList.toggle('active', on);
+      if (on) el.setAttribute('aria-current', 'page');
+      else el.removeAttribute('aria-current');
     });
+    $('#tab-indicator').style.transform = `translateX(${TABS.indexOf(tab) * 100}%)`;
+
     const main = $('#main');
     main.innerHTML = '';
     if (tab === 'hoy') renderHoy(main);
     else if (tab === 'dieta') renderDieta(main);
     else if (tab === 'gym') renderGym(main);
-    else if (tab === 'progreso') renderProgreso(main);
-    else renderHoy(main);
+    else renderProgreso(main);
+    if (state.tab !== tab) enter(main);
+    state.tab = tab;
     window.scrollTo(0, 0);
   }
 
   // ---------- Vista: HOY ----------
   async function renderHoy(main) {
     const date = state.currentDate;
+    const today = todayStr();
     const dieta = state.content.dieta;
     const rutinas = state.content.rutinas;
+    const monday = mondayOf(date);
+    const thisWeek = monday === mondayOf(today);
 
     main.innerHTML = `
-      <div class="date-nav">
-        <button class="btn btn-sm" id="day-prev" aria-label="Día anterior">${ICONS.chevL}</button>
-        <h2>${esc(fmtLong(date))}</h2>
-        <button class="btn btn-sm" id="day-next" aria-label="Día siguiente" ${date >= todayStr() ? 'disabled' : ''}>${ICONS.chevR}</button>
+      ${appHead()}
+      <h1 class="page-title">${esc(fmtLong(date))}</h1>
+      <p class="page-sub">${date === today ? 'Lo que te toca hoy' : 'Registro de un día anterior'}</p>
+      <div class="week">
+        <button class="btn btn-icon" id="week-prev" aria-label="Semana anterior">${ICONS.chevL}</button>
+        <div class="week-days" id="week-days"></div>
+        <button class="btn btn-icon" id="week-next" aria-label="Semana siguiente" ${thisWeek ? 'disabled' : ''}>${ICONS.chevR}</button>
       </div>
       <div id="hoy-body"><p class="muted">Cargando…</p></div>
     `;
-    $('#day-prev').addEventListener('click', () => { state.currentDate = addDays(date, -1); render(); });
-    $('#day-next').addEventListener('click', () => { state.currentDate = addDays(date, 1); render(); });
+
+    const goTo = (d) => {
+      state.currentDate = d;
+      renderHoy(main).then(() => enter($('#hoy-body')));
+    };
+    $('#week-prev').addEventListener('click', () => goTo(addDays(date, -7)));
+    $('#week-next').addEventListener('click', () => {
+      const next = addDays(date, 7);
+      goTo(next > today ? today : next);
+    });
+
+    // Tira de la semana: lunes a domingo
+    const DOW = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+    const days = $('#week-days');
+    for (let i = 0; i < 7; i++) {
+      const d = addDays(monday, i);
+      const b = document.createElement('button');
+      b.className = 'day' + (d === date ? ' selected' : '') + (d === today ? ' today' : '');
+      b.dataset.date = d;
+      b.disabled = d > today;
+      b.setAttribute('aria-label', fmtLong(d));
+      if (d === date) b.setAttribute('aria-current', 'date');
+      b.innerHTML = `<span class="dow">${DOW[i]}</span><span class="dom">${strToDate(d).getDate()}</span><span class="dot"></span>`;
+      b.addEventListener('click', () => { if (d !== date) goTo(d); });
+      days.appendChild(b);
+    }
+    // Punto verde en los días con 4+ comidas (no bloquea la vista)
+    const last = addDays(monday, 6) > today ? today : addDays(monday, 6);
+    API.call(`/progress?from=${monday}&to=${last}`).then((p) => {
+      days.querySelectorAll('.day').forEach((b) => {
+        const info = p.days && p.days[b.dataset.date];
+        b.classList.toggle('ok', !!(info && info.meals >= 4));
+      });
+    }).catch(() => {});
 
     let day;
     try {
@@ -223,139 +344,139 @@
       return;
     }
 
-    const mealsChecked = MEAL_ORDER.filter((m) => day.meals[m] && day.meals[m].checked).length;
     const suggested = suggestedRoutineDay(date);
     const rutinaHoy = suggested ? rutinas.dias.find((d) => d.dia === suggested) : null;
+    const isDone = (id) => !!(day.meals[id] && day.meals[id].checked);
 
     const body = $('#hoy-body');
     body.innerHTML = `
+      <div class="summary">
+        <div class="summary-line"><b>Comidas</b><span class="muted num" id="meals-count"></span></div>
+        <div class="bar" role="progressbar" aria-label="Comidas del día" aria-valuemin="0" aria-valuemax="5" id="meals-bar"><span></span></div>
+      </div>
+
+      <div class="timeline" id="timeline"></div>
+
       <div class="card">
-        <h3>Peso de hoy</h3>
+        <div class="card-head"><h2>Omega 3</h2><span class="meta">1 cda cada 12 h</span></div>
+        <div class="toggles" id="supp-checks"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Peso</h2><span class="meta">${day.weight != null ? 'Guardado' : 'Sin registrar'}</span></div>
         <div class="weight-row">
-          <input type="number" id="weight-input" inputmode="decimal" step="0.1" min="20" max="400"
-                 placeholder="kg" value="${day.weight ?? ''}" aria-label="Peso en kilogramos">
+          <label class="weight-field">
+            <input type="number" id="weight-input" inputmode="decimal" step="0.1" min="20" max="400"
+                   placeholder="0.0" value="${day.weight ?? ''}" aria-label="Peso en kilogramos">
+            <span>kg</span>
+          </label>
           <button class="btn btn-primary" id="weight-save">Guardar</button>
         </div>
       </div>
 
       <div class="card">
-        <h3>Comidas <span class="progress-pill" id="meals-pill">${mealsChecked}/5</span></h3>
-        <div id="meal-checks"></div>
-      </div>
-
-      <div class="card">
-        <h3>Omega 3 (Lysi) — 1 cda cada 12 h</h3>
-        <div id="supp-checks"></div>
-      </div>
-
-      <div class="card">
-        <h3>Gimnasio</h3>
-        ${rutinaHoy
-          ? `<p>Hoy toca: <b>Día ${rutinaHoy.dia} — ${esc(rutinaHoy.nombre)}</b></p>`
-          : '<p class="muted">Hoy es día de descanso según tu plan de lunes a viernes. Si aun así entrenaste, márcalo abajo.</p>'}
+        <div class="card-head"><h2>Gimnasio</h2><span class="meta">${rutinaHoy ? `Día ${rutinaHoy.dia}, ${esc(rutinaHoy.nombre)}` : 'Descanso'}</span></div>
         <div id="gym-box"></div>
       </div>
       <p class="footer-note">${esc(dieta.notaMedica)}</p>
     `;
+
+    // Resumen de comidas
+    const updateSummary = () => {
+      const n = MEAL_ORDER.filter(isDone).length;
+      $('#meals-count').textContent = `${n} de 5`;
+      $('#meals-bar').setAttribute('aria-valuenow', n);
+      $('#meals-bar > span').style.transform = `scaleX(${n / 5})`;
+    };
+    updateSummary();
 
     // Peso
     $('#weight-save').addEventListener('click', async () => {
       const kg = $('#weight-input').value;
       try {
         await API.call(`/day/${date}/weight`, { method: 'PUT', body: { kg: kg === '' ? null : Number(kg) } });
-        toast(kg === '' ? 'Peso borrado' : 'Peso guardado: ' + kg + ' kg');
+        toast(kg === '' ? 'Peso borrado' : `Peso guardado: ${kg} kg`);
       } catch (err) { toast(err.message); }
     });
 
-    // Comidas
-    const mealBox = $('#meal-checks');
+    // Línea del día: un nodo por comida (palomea) y su tarjeta (despliega el menú)
+    const timeline = $('#timeline');
     for (const comida of dieta.comidas) {
-      const checked = day.meals[comida.id] && day.meals[comida.id].checked;
-      const card = document.createElement('div');
-      card.className = 'meal-card' + (checked ? ' checked' : '');
+      const menu = menuDelDia(comida, date);
+      const sem = comida.semana || [];
+      const idx = menuIndex(comida, date);
+      // Alternativas = los siguientes menús completos del banco (mismas raciones)
+      const nAlt = Math.min(4, Math.max(0, sem.length - 1));
+      const altMenus = Array.from({ length: nAlt }, (_, k) => sem[(idx + k + 1) % sem.length]);
+      const regionId = 'meal-' + comida.id;
 
-      const btn = document.createElement('button');
-      btn.className = 'check-item';
-      btn.setAttribute('aria-pressed', checked ? 'true' : 'false');
-      btn.innerHTML = `
-        <span class="check-box">${ICONS.check}</span>
-        <span class="check-body">
-          <span class="check-title">${esc(comida.nombre)}</span>
-          <span class="check-sub">${esc(menuDelDia(comida, date)[0] || '')}…</span>
-        </span>`;
-      btn.addEventListener('click', async () => {
-        const now = !card.classList.contains('checked');
-        card.classList.toggle('checked', now);
-        btn.setAttribute('aria-pressed', now ? 'true' : 'false');
+      const row = document.createElement('div');
+      row.className = 'meal' + (isDone(comida.id) ? ' done' : '');
+      row.innerHTML = `
+        <button class="node" aria-pressed="${isDone(comida.id)}" aria-label="${esc(comida.nombre)} hecha">${ICONS.check}</button>
+        <div class="meal-card">
+          <button class="meal-open" aria-expanded="false" aria-controls="${regionId}">
+            <span>
+              <span class="meal-name">${esc(comida.nombre)}${comida.omega3 ? '<span class="tag">Omega 3</span>' : ''}</span>
+              <span class="meal-dish">${esc(menu[0] || '')}</span>
+            </span>
+            <span class="chev">${ICONS.chevD}</span>
+          </button>
+          <div class="collapse" id="${regionId}" hidden>
+            <div class="meal-body">
+              <ul class="list">${menu.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+              ${altMenus.length ? `
+                <p class="alt-title">¿No se te antoja? Cámbialo completo por:</p>
+                ${altMenus.map((items, k) => `
+                  <div class="alt-group"><b>Opción ${k + 1}</b><span>${items.map(esc).join('. ')}</span></div>`).join('')}` : ''}
+            </div>
+          </div>
+        </div>`;
+
+      const node = $('.node', row);
+      node.addEventListener('click', async () => {
+        const now = !row.classList.contains('done');
+        row.classList.toggle('done', now);
+        node.setAttribute('aria-pressed', String(now));
+        day.meals[comida.id] = { checked: now };
+        updateSummary();
         try {
           await API.call(`/day/${date}/meal`, { method: 'PUT', body: { meal: comida.id, checked: now } });
-          const n = mealBox.querySelectorAll('.meal-card.checked').length;
-          $('#meals-pill').textContent = n + '/5';
         } catch (err) {
-          card.classList.toggle('checked', !now);
+          row.classList.toggle('done', !now);
+          node.setAttribute('aria-pressed', String(!now));
+          day.meals[comida.id] = { checked: !now };
+          updateSummary();
           toast(err.message);
         }
       });
-
-      const exp = document.createElement('button');
-      exp.className = 'expand-btn';
-      exp.setAttribute('aria-label', 'Ver menú de ' + comida.nombre);
-      exp.setAttribute('aria-expanded', 'false');
-      exp.innerHTML = ICONS.chevD;
-
-      // Alternativas = los siguientes menús completos del banco (mismas raciones)
-      const sem = comida.semana || [];
-      const idx = menuIndex(comida, date);
-      const nAlt = Math.min(4, Math.max(0, sem.length - 1));
-      const altMenus = Array.from({ length: nAlt }, (_, k) => sem[(idx + k + 1) % sem.length]);
-
-      const detail = document.createElement('div');
-      detail.className = 'meal-detail hidden';
-      detail.innerHTML = `
-        <ul class="meal-list">${menuDelDia(comida, date).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-        ${altMenus.length ? `
-          <p class="alt-title">¿No se te antoja? Cámbialo completo por:</p>
-          ${altMenus.map((items, k) => `
-            <div class="alt-group"><b>Alternativa ${k + 1}</b><span>${items.map(esc).join(' · ')}</span></div>`).join('')}` : ''}`;
-
-      exp.addEventListener('click', () => {
-        const open = detail.classList.toggle('hidden');
-        exp.classList.toggle('open', !open);
-        exp.setAttribute('aria-expanded', String(!open));
-      });
-
-      const row = document.createElement('div');
-      row.className = 'check-row';
-      row.append(btn, exp);
-      card.append(row, detail);
-      mealBox.appendChild(card);
+      const open = $('.meal-open', row);
+      open.addEventListener('click', () =>
+        setCollapse(open, $('#' + regionId, row), open.getAttribute('aria-expanded') !== 'true'));
+      timeline.appendChild(row);
     }
 
     // Suplemento
     const suppBox = $('#supp-checks');
     const doses = [
-      { id: 'manana', label: 'Toma de la mañana', sub: 'Con el desayuno' },
-      { id: 'noche', label: 'Toma de la noche', sub: 'Con la cena' },
+      { id: 'manana', label: 'Mañana', sub: 'Con el desayuno' },
+      { id: 'noche', label: 'Noche', sub: 'Con la cena' },
     ];
     for (const dose of doses) {
       const checked = !!day.supplements[dose.id];
       const btn = document.createElement('button');
-      btn.className = 'check-item' + (checked ? ' checked' : '');
-      btn.setAttribute('aria-pressed', checked ? 'true' : 'false');
-      btn.innerHTML = `
-        <span class="check-box">${ICONS.check}</span>
-        <span class="check-body">
-          <span class="check-title">${esc(dose.label)}</span>
-          <span class="check-sub">${esc(dose.sub)}</span>
-        </span>`;
+      btn.className = 'toggle' + (checked ? ' on' : '');
+      btn.setAttribute('aria-pressed', String(checked));
+      btn.innerHTML = `<span class="knob">${ICONS.check}</span><span><b>${esc(dose.label)}</b><small>${esc(dose.sub)}</small></span>`;
       btn.addEventListener('click', async () => {
-        const now = !btn.classList.contains('checked');
-        btn.classList.toggle('checked', now);
-        btn.setAttribute('aria-pressed', now ? 'true' : 'false');
+        const now = !btn.classList.contains('on');
+        btn.classList.toggle('on', now);
+        btn.setAttribute('aria-pressed', String(now));
         try {
           await API.call(`/day/${date}/supplement`, { method: 'PUT', body: { dose: dose.id, checked: now } });
         } catch (err) {
-          btn.classList.toggle('checked', !now);
+          btn.classList.toggle('on', !now);
+          btn.setAttribute('aria-pressed', String(!now));
           toast(err.message);
         }
       });
@@ -371,15 +492,11 @@
     if (gym && gym.completed) {
       const d = rutinas.dias.find((x) => x.dia === gym.routineDay);
       box.innerHTML = `
-        <button class="check-item checked" aria-pressed="true">
-          <span class="check-box">${ICONS.check}</span>
-          <span class="check-body">
-            <span class="check-title">¡Sesión completada!</span>
-            <span class="check-sub">Día ${gym.routineDay} — ${esc(d ? d.nombre : '')}</span>
-          </span>
-        </button>
-        <p class="note-banner">Recuerda: 2 frutas después de pesas 🍎🍎</p>`;
-      box.querySelector('.check-item').addEventListener('click', async () => {
+        <button class="done-row" aria-pressed="true">
+          <span class="knob">${ICONS.check}</span>
+          <span><b>Sesión hecha</b><small>Día ${gym.routineDay}, ${esc(d ? d.nombre : '')}. Toca para desmarcar</small></span>
+        </button>`;
+      $('.done-row', box).addEventListener('click', async () => {
         try {
           await API.call(`/day/${date}/gym`, { method: 'PUT', body: { routineDay: gym.routineDay, completed: false } });
           toast('Sesión desmarcada');
@@ -389,89 +506,101 @@
       return;
     }
     box.innerHTML = `
-      <div class="day-pills" role="radiogroup" aria-label="Día de rutina">
+      ${suggested ? '' : '<p class="muted" style="margin-bottom:12px">Hoy es descanso. Si aun así entrenaste, márcalo.</p>'}
+      <div class="segments" role="radiogroup" aria-label="Día de rutina">
         ${rutinas.dias.map((d) => `
-          <button class="day-pill ${suggested === d.dia ? 'active' : ''}" data-day="${d.dia}" role="radio"
+          <button class="seg ${suggested === d.dia ? 'active' : ''}" data-day="${d.dia}" role="radio"
             aria-checked="${suggested === d.dia}">Día ${d.dia}</button>`).join('')}
       </div>
-      <button class="btn btn-success btn-block" id="gym-done">Marcar gym completado</button>`;
+      <button class="btn btn-primary btn-block" id="gym-done">Marcar gym como hecho</button>`;
     let selected = suggested || 1;
-    box.querySelectorAll('.day-pill').forEach((p) => {
-      p.addEventListener('click', () => {
-        selected = Number(p.dataset.day);
-        box.querySelectorAll('.day-pill').forEach((x) => {
-          x.classList.toggle('active', x === p);
-          x.setAttribute('aria-checked', x === p ? 'true' : 'false');
-        });
-      });
-    });
+    wireSegments(box, (b) => { selected = Number(b.dataset.day); });
     $('#gym-done', box).addEventListener('click', async () => {
       try {
         await API.call(`/day/${date}/gym`, { method: 'PUT', body: { routineDay: selected, completed: true } });
-        toast('¡Buen trabajo! 💪');
+        toast('Sesión guardada');
         render();
       } catch (err) { toast(err.message); }
     });
   }
 
+  // Grupo de segmentos de una sola opción
+  function wireSegments(root, onPick) {
+    const segs = root.querySelectorAll('.seg');
+    // Que la opción elegida se vea aunque la fila tenga scroll horizontal
+    root.querySelectorAll('.segments').forEach((row) => {
+      const on = row.querySelector('.seg.active');
+      if (on) row.scrollLeft = on.offsetLeft - (row.clientWidth - on.offsetWidth) / 2;
+    });
+    segs.forEach((b) => {
+      b.addEventListener('click', () => {
+        segs.forEach((x) => {
+          x.classList.toggle('active', x === b);
+          if (x.hasAttribute('aria-checked')) x.setAttribute('aria-checked', String(x === b));
+        });
+        onPick(b);
+      });
+    });
+  }
+
   // ---------- Vista: DIETA ----------
+  // Nombre de cada grupo de equivalentes de racionesDiarias
+  const GRUPOS = {
+    verduras: 'verduras',
+    frutas: 'frutas',
+    cereales: 'cereales',
+    aoaA: 'pollo, pescado y magros',
+    aoaC: 'huevo y panela',
+    grasas: 'grasas',
+  };
   function renderDieta(main) {
     const dieta = state.content.dieta;
     const r = dieta.racionesDiarias;
     const today = todayStr();
     main.innerHTML = `
-      <h2 class="page-title">Tu dieta</h2>
-      <p class="page-sub">Basada en tu plan de equivalentes</p>
+      ${appHead()}
+      <h1 class="page-title">Tu dieta</h1>
+      <p class="page-sub">${esc(dieta.nota)}</p>
 
-      <div class="note-banner">${esc(dieta.notaFrutas)}</div>
-
-      <div class="card">
-        <h3>Raciones del día</h3>
-        <div class="chips">
-          <span class="chip"><b>${r.verduras}</b> verduras</span>
-          <span class="chip"><b>${r.frutas}</b> frutas</span>
-          <span class="chip"><b>${r.cereales}</b> cereales</span>
-          <span class="chip"><b>${r.proteinaAnimal}</b> proteína animal</span>
-          <span class="chip"><b>${r.proteinaVegetal}</b> leguminosa</span>
-          <span class="chip"><b>${r.lacteos}</b> lácteos</span>
-          <span class="chip"><b>${r.grasas}</b> grasas</span>
-          <span class="chip"><b>${r.oleaginosas}</b> oleaginosas</span>
-          <span class="chip"><b>${r.azucares}</b> azúcar</span>
-        </div>
+      <h2 class="section-title">Raciones del día</h2>
+      <div class="portions">
+        ${Object.entries(r).map(([k, n]) => `
+          <div class="portion"><b>${n}</b><span>${esc(GRUPOS[k] || k)}</span></div>`).join('')}
       </div>
 
-      ${dieta.comidas.map((c) => `
+      ${dieta.comidas.map((c) => {
+        const sem = c.semana || [];
+        const idx = menuIndex(c, today);
+        return `
         <div class="card">
-          <h3>${esc(c.icono)} ${esc(c.nombre)}${c.omega3 ? ' <span class="progress-pill">+ Omega 3</span>' : ''}</h3>
-          <p class="muted" style="margin:0 0 6px">Menú de hoy${c.semana && c.semana.length ? ` · ${menuIndex(c, today) + 1} de ${c.semana.length}` : ''}:</p>
-          <ul class="meal-list">${menuDelDia(c, today).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-          ${c.semana && c.semana.length > 1 ? `
-            <details class="alt">
-              <summary>Ver los ${c.semana.length} menús</summary>
-              ${c.semana.map((items, i) => `
-                <div class="alt-group"><b>Menú ${i + 1}</b><span>${items.map(esc).join(' · ')}</span></div>`).join('')}
-            </details>` : ''}
-          ${c.alternativas && c.alternativas.length ? `
-            <details class="alt">
-              <summary>Equivalencias por ingrediente (cambios puntuales)</summary>
-              ${c.alternativas.map((a) => `
-                <div class="alt-group"><b>${esc(a.titulo)}</b><span>${a.opciones.map(esc).join(' · ')}</span></div>`).join('')}
-            </details>` : ''}
-        </div>`).join('')}
+          <div class="card-head">
+            <h2>${esc(c.nombre)}${c.omega3 ? ' <span class="tag">Omega 3</span>' : ''}</h2>
+            ${sem.length ? `<span class="meta num">Menú ${idx + 1} de ${sem.length}</span>` : ''}
+          </div>
+          <ul class="list">${menuDelDia(c, today).map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+          <div class="divider-group" style="margin-top:12px">
+            ${sem.length > 1 ? disclosure(`Ver los ${sem.length} menús`, sem.map((items, i) => `
+              <div class="alt-group${i === idx ? ' current' : ''}"><b>Menú ${i + 1}${i === idx ? ', hoy' : ''}</b><span>${items.map(esc).join('. ')}</span></div>`).join('')) : ''}
+            ${c.alternativas && c.alternativas.length ? disclosure('Equivalencias por ingrediente', c.alternativas.map((a) => `
+              <div class="alt-group"><b>${esc(a.titulo)}</b><span>${a.opciones.map(esc).join(', ')}</span></div>`).join('')) : ''}
+          </div>
+        </div>`;
+      }).join('')}
 
       <div class="card">
-        <h3>Suplemento</h3>
-        <p><b>${esc(dieta.suplemento.nombre)}</b>: ${esc(dieta.suplemento.indicacion)}</p>
-        <ul class="meal-list">${dieta.suplemento.alternativas.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
+        <div class="card-head"><h2>Suplemento</h2></div>
+        <p style="margin-bottom:10px"><b>${esc(dieta.suplemento.nombre)}</b>: ${esc(dieta.suplemento.indicacion)}</p>
+        <ul class="list">${dieta.suplemento.alternativas.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
       </div>
 
       <div class="card">
-        <h3>Recomendaciones de tu instituto</h3>
-        <ul class="meal-list">${dieta.recomendaciones.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+        <div class="card-head"><h2>Recomendaciones</h2></div>
+        <ul class="list">${dieta.recomendaciones.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
       </div>
 
-      <p class="footer-note">${esc(dieta.notaMedica)} — ${esc(dieta.fuente)}</p>
+      <p class="footer-note">${esc(dieta.notaMedica)} ${esc(dieta.fuente)}.</p>
     `;
+    wireDisclosures(main);
   }
 
   // ---------- Vista: GYM ----------
@@ -500,27 +629,24 @@
     const initial = suggested || 1;
 
     main.innerHTML = `
-      <h2 class="page-title">Rutinas</h2>
-      <p class="page-sub">5 días por semana · 45–60 min</p>
-      <div class="card" id="gym-today"><h3>${ICONS.timer} Entrenamiento de hoy</h3><p class="muted">Cargando…</p></div>
-      <div class="day-pills" id="gym-tabs"></div>
+      ${appHead()}
+      <h1 class="page-title">Rutinas</h1>
+      <p class="page-sub">5 días por semana, de 45 a 60 minutos</p>
+      <div class="card" id="gym-today"><div class="card-head"><h2>Entrenamiento de hoy</h2></div><p class="muted">Cargando…</p></div>
+      <h2 class="section-title">Ver rutina</h2>
+      <div class="segments" id="gym-tabs">
+        ${rutinas.dias.map((d) => `<button class="seg ${d.dia === initial ? 'active' : ''}" data-day="${d.dia}">Día ${d.dia}</button>`).join('')}
+      </div>
       <div id="gym-day"></div>
       <div class="card">
-        <h3>Antes de empezar</h3>
-        <ul class="meal-list">${rutinas.notas.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
+        <div class="card-head"><h2>Antes de empezar</h2></div>
+        <ul class="list">${rutinas.notas.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
       </div>
     `;
 
-    const tabs = $('#gym-tabs');
-    rutinas.dias.forEach((d) => {
-      const b = document.createElement('button');
-      b.className = 'day-pill' + (d.dia === initial ? ' active' : '');
-      b.textContent = `Día ${d.dia}`;
-      b.addEventListener('click', () => {
-        tabs.querySelectorAll('.day-pill').forEach((x) => x.classList.toggle('active', x === b));
-        renderGymDay(d);
-      });
-      tabs.appendChild(b);
+    wireSegments($('#gym-tabs'), (b) => {
+      renderGymDay(rutinas.dias.find((d) => d.dia === Number(b.dataset.day)));
+      enter($('#gym-day'));
     });
     renderGymDay(rutinas.dias.find((d) => d.dia === initial));
 
@@ -535,21 +661,18 @@
   function renderGymToday(box, gym, suggested) {
     const rutinas = state.content.rutinas;
     const today = todayStr();
+    const head = (meta) => `<div class="card-head"><h2>Entrenamiento de hoy</h2>${meta ? `<span class="meta">${meta}</span>` : ''}</div>`;
 
     // Ya completado hoy
     if (gym && gym.completed) {
       const d = rutinas.dias.find((x) => x.dia === gym.routineDay);
       box.innerHTML = `
-        <h3>${ICONS.timer} Entrenamiento de hoy</h3>
-        <button class="check-item checked" aria-pressed="true">
-          <span class="check-box">${ICONS.check}</span>
-          <span class="check-body">
-            <span class="check-title">¡Completado!</span>
-            <span class="check-sub">Día ${gym.routineDay} — ${esc(d ? d.nombre : '')}${gym.notes ? ' · ' + esc(gym.notes) : ''}</span>
-          </span>
-        </button>
-        <p class="note-banner">Recuerda: 2 frutas después de pesas 🍎🍎</p>`;
-      box.querySelector('.check-item').addEventListener('click', async () => {
+        ${head('')}
+        <button class="done-row" aria-pressed="true">
+          <span class="knob">${ICONS.check}</span>
+          <span><b>Sesión hecha</b><small>Día ${gym.routineDay}, ${esc(d ? d.nombre : '')}${gym.notes ? '. ' + esc(gym.notes) : ''}</small></span>
+        </button>`;
+      $('.done-row', box).addEventListener('click', async () => {
         try {
           await API.call(`/day/${today}/gym`, { method: 'PUT', body: { routineDay: gym.routineDay, completed: false } });
           toast('Sesión desmarcada');
@@ -564,10 +687,12 @@
     if (workout) {
       const d = rutinas.dias.find((x) => x.dia === workout.day);
       box.innerHTML = `
-        <h3>${ICONS.timer} Entrenando: Día ${workout.day} — ${esc(d ? d.nombre : '')}</h3>
-        <div class="timer" id="gym-timer">00:00</div>
-        <button class="btn btn-success btn-block" id="gym-finish">Terminar y marcar completado</button>
-        <button class="btn btn-block" id="gym-cancel" style="margin-top:10px">Cancelar entrenamiento</button>`;
+        ${head(`Día ${workout.day}, ${esc(d ? d.nombre : '')}`)}
+        <div class="timer" id="gym-timer" aria-live="off">00:00</div>
+        <div class="stack">
+          <button class="btn btn-primary btn-block" id="gym-finish">Terminar y guardar</button>
+          <button class="btn btn-ghost btn-block" id="gym-cancel">Cancelar entrenamiento</button>
+        </div>`;
       const timerEl = $('#gym-timer', box);
       const tick = () => { timerEl.textContent = fmtElapsed(Date.now() - workout.start); };
       tick();
@@ -581,7 +706,7 @@
             body: { routineDay: workout.day, completed: true, notes: `Duración: ${min} min` },
           });
           localStorage.removeItem('vc_workout');
-          toast(`¡Buen trabajo! 💪 ${min} min`);
+          toast(`Sesión guardada: ${min} min`);
           render();
         } catch (err) { toast(err.message); }
       });
@@ -595,35 +720,28 @@
 
     // Sin empezar → elegir qué trabajar hoy e iniciar
     box.innerHTML = `
-      <h3>${ICONS.timer} Entrenamiento de hoy</h3>
-      <p class="muted" style="margin:0 0 8px">¿Qué toca trabajar hoy?</p>
-      <div class="day-pills" role="radiogroup" aria-label="Parte del cuerpo de hoy">
+      ${head(suggested ? '' : 'Hoy es descanso')}
+      <div class="segments" role="radiogroup" aria-label="Parte del cuerpo de hoy">
         ${rutinas.dias.map((d) => `
-          <button class="day-pill ${suggested === d.dia ? 'active' : ''}" data-day="${d.dia}" role="radio"
-            aria-checked="${suggested === d.dia}">${d.dia} · ${esc(d.nombre)}</button>`).join('')}
+          <button class="seg ${suggested === d.dia ? 'active' : ''}" data-day="${d.dia}" role="radio"
+            aria-checked="${suggested === d.dia}">${esc(d.nombre)}</button>`).join('')}
       </div>
-      <button class="btn btn-primary btn-block" id="gym-start">${ICONS.timer} Iniciar entrenamiento</button>
-      <button class="btn btn-block btn-sm" id="gym-quick" style="margin-top:10px">Marcar completado sin cronómetro</button>`;
+      <div class="stack">
+        <button class="btn btn-primary btn-block" id="gym-start">${ICONS.timer} Iniciar entrenamiento</button>
+        <button class="btn btn-ghost btn-block" id="gym-quick">Marcar como hecho sin cronómetro</button>
+      </div>`;
 
     let selected = suggested || 1;
-    box.querySelectorAll('.day-pill').forEach((p) => {
-      p.addEventListener('click', () => {
-        selected = Number(p.dataset.day);
-        box.querySelectorAll('.day-pill').forEach((x) => {
-          x.classList.toggle('active', x === p);
-          x.setAttribute('aria-checked', x === p ? 'true' : 'false');
-        });
-      });
-    });
+    wireSegments(box, (b) => { selected = Number(b.dataset.day); });
     $('#gym-start', box).addEventListener('click', () => {
       localStorage.setItem('vc_workout', JSON.stringify({ date: today, day: selected, start: Date.now() }));
-      toast('¡A darle! 💪');
+      toast('Cronómetro iniciado');
       render();
     });
     $('#gym-quick', box).addEventListener('click', async () => {
       try {
         await API.call(`/day/${today}/gym`, { method: 'PUT', body: { routineDay: selected, completed: true } });
-        toast('¡Buen trabajo! 💪');
+        toast('Sesión guardada');
         render();
       } catch (err) { toast(err.message); }
     });
@@ -633,41 +751,48 @@
     const box = $('#gym-day');
     box.innerHTML = `
       <div class="card">
-        <h3>Día ${dia.dia} — ${esc(dia.nombre)}</h3>
-        ${dia.ejercicios.map((ex, i) => `
-          <div class="exercise">
-            <div class="ex-head">
-              <div>
-                <div class="ex-name">${esc(ex.nombre)}</div>
-                <div class="ex-meta">${ex.series} ${ex.series === 1 ? 'serie' : 'series'} × ${esc(ex.reps)}${ex.descanso !== '-' ? ' · descanso ' + esc(ex.descanso) : ''}</div>
+        <div class="card-head"><h2>${esc(dia.nombre)}</h2><span class="meta">Día ${dia.dia}</span></div>
+        <div class="divider-group">
+          ${dia.ejercicios.map((ex, i) => `
+            <div class="exercise">
+              <div class="ex-head">
+                <div>
+                  <div class="ex-name">${esc(ex.nombre)}</div>
+                  <div class="ex-meta">${ex.series} ${ex.series === 1 ? 'serie' : 'series'} × ${esc(ex.reps)}${ex.descanso !== '-' ? ', descanso ' + esc(ex.descanso) : ''}</div>
+                </div>
+                ${ex.videoId || ex.videoQuery ? `<button class="video-btn" data-i="${i}" aria-expanded="false" aria-controls="vf-${i}">${ICONS.play} Video</button>` : ''}
               </div>
-              ${ex.videoId || ex.videoQuery ? `<button class="video-btn" data-i="${i}">${ICONS.play} Video</button>` : ''}
-            </div>
-            <div class="video-frame hidden" data-frame="${i}"></div>
-          </div>`).join('')}
+              <div class="collapse video-frame" id="vf-${i}" hidden></div>
+            </div>`).join('')}
+        </div>
       </div>
     `;
     box.querySelectorAll('.video-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const i = Number(btn.dataset.i);
         const ex = dia.ejercicios[i];
-        const frame = box.querySelector(`[data-frame="${i}"]`);
-        const isOpen = !frame.classList.contains('hidden');
+        const frame = $('#vf-' + i, box);
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
         // Cierra los demás videos para no cargar varios iframes
-        box.querySelectorAll('.video-frame').forEach((f) => { f.classList.add('hidden'); f.innerHTML = ''; });
-        if (isOpen) return;
-        if (ex.videoId) {
-          frame.innerHTML = `
-            <iframe src="https://www.youtube-nocookie.com/embed/${ex.videoId}" title="Video: ${esc(ex.nombre)}"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen loading="lazy"></iframe>
-            <p class="muted" style="margin:6px 0 0;font-size:0.85rem">¿No carga? <a style="color:var(--primary)" target="_blank" rel="noopener"
-              href="https://www.youtube.com/watch?v=${ex.videoId}">Ábrelo en YouTube</a></p>`;
-        } else {
-          frame.innerHTML = `<a class="btn btn-block" target="_blank" rel="noopener"
-            href="https://www.youtube.com/results?search_query=${encodeURIComponent(ex.videoQuery)}">Buscar video en YouTube</a>`;
+        box.querySelectorAll('.video-btn[aria-expanded="true"]').forEach((other) => {
+          if (other === btn) return;
+          const f = $('#vf-' + other.dataset.i, box);
+          setCollapse(other, f, false);
+          setTimeout(() => { if (f.hidden) f.innerHTML = ''; }, 420);
+        });
+        if (isOpen) {
+          setCollapse(btn, frame, false);
+          setTimeout(() => { if (frame.hidden) frame.innerHTML = ''; }, 420);
+          return;
         }
-        frame.classList.remove('hidden');
+        frame.innerHTML = ex.videoId ? `
+          <iframe src="https://www.youtube-nocookie.com/embed/${ex.videoId}" title="Video: ${esc(ex.nombre)}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+          <p>¿No carga? <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=${ex.videoId}">Ábrelo en YouTube</a></p>` : `
+          <p><a target="_blank" rel="noopener"
+            href="https://www.youtube.com/results?search_query=${encodeURIComponent(ex.videoQuery)}">Buscar el video en YouTube</a></p>`;
+        setCollapse(btn, frame, true);
       });
     });
   }
@@ -675,8 +800,9 @@
   // ---------- Vista: PROGRESO ----------
   async function renderProgreso(main) {
     main.innerHTML = `
-      <h2 class="page-title">Progreso</h2>
-      <p class="page-sub">Peso, gym y constancia</p>
+      ${appHead()}
+      <h1 class="page-title">Progreso</h1>
+      <p class="page-sub">Tu peso, el gym y qué tan constante vas</p>
       <div id="prog-body"><p class="muted">Cargando…</p></div>
     `;
 
@@ -694,8 +820,7 @@
     }
 
     // Semana actual (lunes a domingo)
-    const now = strToDate(today);
-    const monday = addDays(today, -((now.getDay() + 6) % 7));
+    const monday = mondayOf(today);
     let gymWeek = 0, dietWeekDays = 0, trackedWeekDays = 0;
     for (let i = 0; i < 7; i++) {
       const d = addDays(monday, i);
@@ -711,6 +836,7 @@
     const lastW = weights.length ? weights[weights.length - 1].kg : null;
     const prevMonthW = weights.find((w) => w.date >= addDays(today, -30));
     const delta = lastW !== null && prevMonthW ? (lastW - prevMonthW.kg) : null;
+    const fmtDelta = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(1);
 
     // Recordatorio de laboratorios (cada 6 meses)
     let labBanner = '';
@@ -719,62 +845,67 @@
       due.setMonth(due.getMonth() + 6);
       const dueStr = dateToStr(due);
       if (dueStr <= today) {
-        labBanner = `<div class="note-banner">🩸 Ya tocan tus laboratorios (colesterol y triglicéridos). Último: ${esc(settings.lastLabDate)}</div>`;
+        labBanner = `<div class="note note-warn">Ya tocan tus laboratorios de colesterol y triglicéridos. Los últimos fueron el ${esc(settings.lastLabDate)}.</div>`;
       } else if (dueStr <= addDays(today, 21)) {
-        labBanner = `<div class="note-banner">🩸 Tus laboratorios semestrales tocan el ${esc(dueStr)}. Ve agendando.</div>`;
+        labBanner = `<div class="note note-warn">Tus laboratorios semestrales tocan el ${esc(dueStr)}. Ve agendando.</div>`;
       }
     }
 
     $('#prog-body').innerHTML = `
       ${labBanner}
-      <div class="stat-grid">
-        <div class="stat"><div class="num">${lastW !== null ? lastW : '—'}</div><div class="lbl">kg actual</div></div>
-        <div class="stat"><div class="num">${delta !== null ? (delta > 0 ? '+' : '') + delta.toFixed(1) : '—'}</div><div class="lbl">kg en 30 días</div></div>
-        <div class="stat"><div class="num">${gymWeek}/5</div><div class="lbl">gym esta semana</div></div>
-        <div class="stat"><div class="num">${trackedWeekDays ? Math.round((dietWeekDays / trackedWeekDays) * 100) + '%' : '—'}</div><div class="lbl">dieta esta semana</div></div>
+      <div class="stats">
+        <div class="stat"><span>Peso actual</span><b>${lastW !== null ? lastW + ' <small>kg</small>' : '—'}</b></div>
+        <div class="stat"><span>Cambio en 30 días</span><b>${delta !== null ? fmtDelta(delta) + ' <small>kg</small>' : '—'}</b></div>
+        <div class="stat"><span>Gym esta semana</span><b>${gymWeek} <small>de 5</small></b></div>
+        <div class="stat"><span>Dieta esta semana</span><b>${trackedWeekDays ? Math.round((dietWeekDays / trackedWeekDays) * 100) + ' <small>%</small>' : '—'}</b></div>
       </div>
 
       <div class="card">
-        <h3>Peso</h3>
-        <div class="range-pills">
-          ${[30, 90, 180].map((r) => `<button class="day-pill ${state.chartRange === r ? 'active' : ''}" data-range="${r}">${r} días</button>`).join('')}
+        <div class="card-head"><h2>Peso</h2>${settings.targetWeight ? `<span class="meta num">Meta ${esc(settings.targetWeight)} kg</span>` : ''}</div>
+        <div class="segments">
+          ${[30, 90, 180].map((r) => `<button class="seg ${state.chartRange === r ? 'active' : ''}" data-range="${r}">${r} días</button>`).join('')}
         </div>
         <div class="chart-box"><canvas id="weight-chart" role="img" aria-label="Gráfica de peso"></canvas></div>
-        ${weights.length === 0 ? '<p class="muted">Aún no registras tu peso. Hazlo desde la pestaña Hoy.</p>' : ''}
+        ${weights.length === 0 ? '<p class="empty-chart">Aún no hay pesos. Regístralo desde la pestaña Hoy.</p>' : ''}
       </div>
 
       <div class="card">
         <div class="cal-head">
-          <button class="btn btn-sm" id="cal-prev" aria-label="Mes anterior">${ICONS.chevL}</button>
-          <h3 id="cal-title" style="margin:0"></h3>
-          <button class="btn btn-sm" id="cal-next" aria-label="Mes siguiente">${ICONS.chevR}</button>
+          <button class="btn btn-icon" id="cal-prev" aria-label="Mes anterior">${ICONS.chevL}</button>
+          <h2 id="cal-title"></h2>
+          <button class="btn btn-icon" id="cal-next" aria-label="Mes siguiente">${ICONS.chevR}</button>
         </div>
         <div class="cal-grid" id="cal-grid"></div>
         <div class="legend">
-          <span><span class="cal-dot gym"></span> Gym</span>
-          <span><span class="cal-dot diet"></span> Dieta (4+ comidas)</span>
+          <span><span class="sw-diet"></span> Dieta cumplida (4 o más comidas)</span>
+          <span><span class="cal-dot"></span> Fuiste al gym</span>
         </div>
       </div>
 
       <div class="card">
-        <h3>Ajustes</h3>
-        <label for="set-target">Peso meta (kg)</label>
-        <input type="number" id="set-target" step="0.1" value="${esc(settings.targetWeight || '')}" placeholder="Ej. 75">
-        <label for="set-lab">Fecha de tus últimos laboratorios</label>
-        <input type="date" id="set-lab" value="${esc(settings.lastLabDate || '')}">
-        <button class="btn btn-primary btn-block" id="set-save" style="margin-top:14px">Guardar ajustes</button>
-        <button class="btn btn-block" id="btn-logout" style="margin-top:10px">Cerrar sesión</button>
+        <div class="card-head"><h2>Ajustes</h2></div>
+        <div class="field">
+          <label for="set-target">Peso meta (kg)</label>
+          <input type="number" id="set-target" inputmode="decimal" step="0.1" value="${esc(settings.targetWeight || '')}" placeholder="Por ejemplo, 75">
+        </div>
+        <div class="field">
+          <label for="set-lab">Fecha de tus últimos laboratorios</label>
+          <input type="date" id="set-lab" value="${esc(settings.lastLabDate || '')}">
+        </div>
+        <div class="stack">
+          <button class="btn btn-primary btn-block" id="set-save">Guardar ajustes</button>
+          <button class="btn btn-ghost btn-block" id="btn-logout">Cerrar sesión</button>
+        </div>
       </div>
     `;
 
     // Gráfica
-    drawChart(weights, settings.targetWeight ? Number(settings.targetWeight) : null);
-    $('#prog-body').querySelectorAll('[data-range]').forEach((b) => {
-      b.addEventListener('click', () => {
-        state.chartRange = Number(b.dataset.range);
-        $('#prog-body').querySelectorAll('[data-range]').forEach((x) => x.classList.toggle('active', x === b));
-        drawChart(weights, settings.targetWeight ? Number(settings.targetWeight) : null);
-      });
+    const target = settings.targetWeight ? Number(settings.targetWeight) : null;
+    drawChart(weights, target);
+    wireSegments($('#prog-body'), (b) => {
+      if (!b.dataset.range) return;
+      state.chartRange = Number(b.dataset.range);
+      drawChart(weights, target);
     });
 
     // Calendario
@@ -801,37 +932,46 @@
     const pts = weights.filter((w) => w.date >= cutoff);
     const ctx = $('#weight-chart');
     if (state.chart) state.chart.destroy();
+    const font = { family: 'Manrope', size: 12 };
     const datasets = [{
       label: 'Peso (kg)',
       data: pts.map((w) => w.kg),
-      borderColor: '#F97316',
-      backgroundColor: 'rgba(249, 115, 22, 0.15)',
+      borderColor: '#2f7d3e',
+      backgroundColor: 'rgba(154, 217, 139, 0.18)',
+      borderWidth: 2,
       fill: true,
-      tension: 0.3,
-      pointRadius: 4,
-      pointBackgroundColor: '#F97316',
+      tension: 0,
+      pointRadius: 0,
+      pointHoverRadius: 5,
+      pointBackgroundColor: '#2f7d3e',
     }];
     if (target && pts.length) {
       datasets.push({
         label: 'Meta',
         data: pts.map(() => target),
-        borderColor: '#22C55E',
-        borderDash: [6, 6],
+        borderColor: '#8a938b',
+        borderWidth: 1.5,
+        borderDash: [5, 5],
         pointRadius: 0,
         fill: false,
       });
     }
     state.chart = new Chart(ctx, {
       type: 'line',
-      data: { labels: pts.map((w) => w.date.slice(5)), datasets },
+      data: { labels: pts.map((w) => w.date.slice(8) + '/' + w.date.slice(5, 7)), datasets },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        animation: reduceMotion() ? false : { duration: 400, easing: 'easeOutQuart' },
+        interaction: { mode: 'index', intersect: false },
         scales: {
-          x: { ticks: { color: '#9DB0C9', maxTicksLimit: 7 }, grid: { color: 'rgba(248,250,252,0.06)' } },
-          y: { ticks: { color: '#9DB0C9' }, grid: { color: 'rgba(248,250,252,0.06)' } },
+          x: { ticks: { color: '#5a625b', maxTicksLimit: 5, font }, grid: { display: false }, border: { display: false } },
+          y: { ticks: { color: '#5a625b', maxTicksLimit: 5, font }, grid: { color: '#eef1ec' }, border: { display: false } },
         },
-        plugins: { legend: { labels: { color: '#F8FAFC' } } },
+        plugins: {
+          legend: { display: datasets.length > 1, position: 'top', align: 'end', labels: { color: '#5a625b', boxWidth: 12, boxHeight: 2, font } },
+          tooltip: { backgroundColor: '#18201a', titleFont: font, bodyFont: font, padding: 10, cornerRadius: 10, displayColors: false },
+        },
       },
     });
   }
@@ -853,19 +993,16 @@
     const offset = (first.getDay() + 6) % 7; // lunes = 0
     const daysInMonth = new Date(y, m + 1, 0).getDate();
     const today = todayStr();
-    for (let i = 0; i < offset; i++) {
-      const el = document.createElement('div');
-      el.className = 'cal-cell empty';
-      grid.appendChild(el);
-    }
+    for (let i = 0; i < offset; i++) grid.appendChild(document.createElement('div'));
     for (let d = 1; d <= daysInMonth; d++) {
       const ds = dateToStr(new Date(y, m, d));
       const info = data.days[ds];
       const el = document.createElement('div');
-      el.className = 'cal-cell' + (ds === today ? ' today' : '');
-      el.innerHTML = `<span>${d}</span><span class="cal-dots">${info && info.gym ? '<span class="cal-dot gym"></span>' : ''}${info && info.meals >= 4 ? '<span class="cal-dot diet"></span>' : ''}</span>`;
+      el.className = 'cal-cell' + (info && info.meals >= 4 ? ' diet' : '') + (ds === today ? ' today' : '');
+      el.innerHTML = `<span>${d}</span><span class="cal-dots">${info && info.gym ? '<span class="cal-dot"></span>' : ''}</span>`;
       grid.appendChild(el);
     }
+    enter(grid);
   }
 
   // ---------- Arranque ----------

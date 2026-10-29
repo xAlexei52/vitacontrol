@@ -1,13 +1,13 @@
 # VitaControl
 
 App personal para llevar el control de tu dieta, tu peso y tus días de gimnasio.
-Basada en el plan de alimentación por equivalentes del Instituto Jalisciense de Cancerología.
+Basada en tu plan de alimentación por equivalentes de 2,100 kcal (135 g de proteína).
 
 ## Qué hace
 
 - **Entrada con PIN**: pad numérico grande (pensado para pantalla táctil / refrigerador). La sesión dura 1 año, así que en la práctica solo lo tecleas una vez por dispositivo.
 - **Hoy**: palomea tus 5 comidas del día, tus 2 tomas de Omega 3, registra tu peso y marca tu sesión de gym. Puedes navegar a días anteriores si se te olvidó registrar algo.
-- **Dieta**: tu menú completo con alternativas equivalentes por comida, tu suplemento y las recomendaciones de tu instituto.
+- **Dieta**: tu menú completo con alternativas equivalentes por comida, tu suplemento y las recomendaciones del plan.
 - **Gym**: rutina de 5 días (pecho/tríceps, espalda/bíceps, pierna, hombro/abs, full body + cardio) con video de técnica por ejercicio.
 - **Progreso**: gráfica de peso, calendario del mes con tus días de gym y dieta, adherencia semanal y recordatorio de laboratorios semestrales.
 
